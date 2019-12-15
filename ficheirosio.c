@@ -6,6 +6,5 @@ void criaBinario(void){
     ficheiro=fopen("data.dat", "wb");
     if(ficheiro==NULL){
         printf("Erro: não existe memória suficiente para criar este ficheiro");
-    }
-    
+    }   
 }
