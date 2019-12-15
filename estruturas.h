@@ -1,5 +1,6 @@
 #ifndef ESTRUTURAS_DECLARED
 #define ESTRUTURAS_DECLARED
+#include <time.h>
 #include "constantes.h"
 
 typedef struct 
@@ -25,5 +26,12 @@ typedef struct{
     unsigned char exame;
     unsigned char tipo;   
 }pergunta;
-
+typedef struct{
+    unsigned int designacao;
+    struct tm tempoDeInicio;
+    struct tm tempoDeFim; 
+    unsigned char minutosDur;
+    unsigned char prova;
+    unsigned char estado;
+}treino;
 #endif
