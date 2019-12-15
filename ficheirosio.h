@@ -2,5 +2,6 @@
 #define FICHEIROSIO_DECLARED
 #include <stdlib.h>
 #include <malloc.h>
-#include "ficheirosio.h"
+#include "estruturas.h"
+void guardaTreino(treino treGrav);
 #endif

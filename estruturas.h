@@ -33,5 +33,9 @@ typedef struct{
     unsigned char minutosDur;
     unsigned char prova;
     unsigned char estado;
+    unsigned char numperg;
+    unsigned char numdascertas;
+    unsigned char numdaserradas;
+    float nota; 
 }treino;
 #endif
