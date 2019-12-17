@@ -42,8 +42,4 @@ typedef struct{
 
 
 
-//FICHEIROSIO
-typedef struct{
-    unsigned 
-}header;
 #endif
