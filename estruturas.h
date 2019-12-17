@@ -10,16 +10,15 @@ typedef struct
    
    unsigned char regime;
    unsigned char turno[MAX_CHARACTERES_TURNO_ALUNO];
-   unsigned int treinosComp;
+   unsigned short treinosComp;
    unsigned int respostasTotais;
    unsigned int respostasCertas;
 }aluno;
 typedef struct{
     char resposta[MAX_CHARACTERES_RESPOSTA_RESPOSTA];
-
 }resposta;
 typedef struct{
-    unsigned char designacao; 
+    unsigned char id; 
     resposta resposta[NUMERO_RESPOSTAS_PERGUNTA];
     unsigned char respostacerta;
     unsigned char materia;  
@@ -27,7 +26,7 @@ typedef struct{
     unsigned char tipo;   
 }pergunta;
 typedef struct{
-    unsigned int designacao;
+    unsigned int id;
     struct tm tempoDeInicio;
     struct tm tempoDeFim; 
     unsigned char minutosDur;
@@ -38,4 +37,13 @@ typedef struct{
     unsigned char numdaserradas;
     float nota; 
 }treino;
+
+
+
+
+
+//FICHEIROSIO
+typedef struct{
+    unsigned 
+}header;
 #endif
