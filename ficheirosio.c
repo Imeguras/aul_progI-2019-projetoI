@@ -14,28 +14,40 @@ FILE *ficheiro=NULL;
     um chunk fim, END, indica o fim do ficheiro
 */
 void criaFichBinario(){
+    //variaveis vazias
     size_t debug;
-    resposta rvazio={""};
-    
-    resposta mvazio[NUMERO_RESPOSTAS_PERGUNTA]={rvazio};
+    int zero =0;
+    resposta rvazio={'t','\0'};
+    resposta mvazio[NUMERO_RESPOSTAS_PERGUNTA]={rvazio,rvazio,rvazio,rvazio};
     pergunta vazia={0,mvazio,0,0,0,0};
-    aluno vazio;
+    aluno avazio={0,'\0',0,'\0',0,0};
+    struct tm yvazio={0};
+    treino tvazio ={0,yvazio,yvazio,0,0,0,0,0,0,0};
+
     ficheiro=fopen("data.dat", "wb");
     if(ficheiro==NULL){
-        printf("Algo correu mal com a criação do ficheiro");
+        printf("\nAlgo correu mal com a criação do ficheiro");
     }else{
-        
         debug = fwrite(HEADER_FICHEIROSIO, 8,1,ficheiro);
-        debug += fwrite(0, sizeof(char), 2, ficheiro);
-        debug += fwrite(0, sizeof(short), 1, ficheiro);
-        debug += fwrite(0, sizeof(int), 1, ficheiro);
+        debug += fwrite(&zero, sizeof(char), 2, ficheiro);
+        debug += fwrite(&zero, sizeof(short), 1, ficheiro);
+        debug += fwrite(&zero, sizeof(int), 1, ficheiro);
         debug += fwrite(PERGUNTASC_FICHEIROSIO, 8, 1, ficheiro);
-        debug += fwrite(&vazia,sizeof(vazia), 40, ficheiro);
+        debug += fwrite(&vazia,sizeof(pergunta), MAX_PERGUNTAS, ficheiro);
         debug += fwrite(ESTUDANTESC_FICHEIROSIO, 8, 1, ficheiro);
-        debug += fwrite();
-        fclose(ficheiro); 
+        debug += fwrite(&avazio,sizeof(aluno), MAX_ALUNOS,ficheiro);
+        debug += fwrite(TREINOSC_FICHEIROSIO, 8, 1, ficheiro);
+        debug += fwrite(&tvazio, sizeof(treino), 1, ficheiro);
+        debug += fwrite(ENDC_FICHEIROSIO, 8, 1, ficheiro);
+        printf("\nEscritas: %d linhas", debug);
     }
+    fclose(ficheiro);
 }
+/*void forcaListaPerguntas(){
+    size_t debug; 
+    
+    debug = fread();
+}*/
 /*
     Função usada para guardar um treino dentro do ficheiro binário data.dat
     @param trevGrav, estrutura do tipo treino a qual se pretende ser guardada
