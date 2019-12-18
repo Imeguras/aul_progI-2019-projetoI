@@ -67,9 +67,3 @@ void guardaTreino(treino treGrav){
     }
     
 }
-
-int main(int argc, char const *argv[])
-{
-    criaFichBinario();
-    return 0;
-}
