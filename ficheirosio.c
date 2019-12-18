@@ -17,28 +17,32 @@ void criaFichBinario(){
     //variaveis vazias
     size_t debug;
     int zero =0;
-    resposta rvazio={'t','\0'};
+    resposta rvazio={'\1','\0'};
     resposta mvazio[NUMERO_RESPOSTAS_PERGUNTA]={rvazio,rvazio,rvazio,rvazio};
-    pergunta vazia={0,mvazio,0,0,0,0};
-    aluno avazio={0,'\0',0,'\0',0,0};
+    pergunta vazia={0,mvazio,1,1,1,1};
+    aluno avazio={0,'\1',1,'\1',1,1};
     struct tm yvazio={0};
-    treino tvazio ={0,yvazio,yvazio,0,0,0,0,0,0,0};
+    treino tvazio ={0,yvazio,yvazio,1,1,1,1,1,1,1};
 
     ficheiro=fopen("data.dat", "wb");
     if(ficheiro==NULL){
         printf("\nAlgo correu mal com a criação do ficheiro");
     }else{
-        debug = fwrite(HEADER_FICHEIROSIO, 8,1,ficheiro);
+        debug = fwrite(&HEADER_FICHEIROSIO, 1,8,ficheiro);
         debug += fwrite(&zero, sizeof(char), 2, ficheiro);
         debug += fwrite(&zero, sizeof(short), 1, ficheiro);
         debug += fwrite(&zero, sizeof(int), 1, ficheiro);
-        debug += fwrite(PERGUNTASC_FICHEIROSIO, 8, 1, ficheiro);
-        debug += fwrite(&vazia,sizeof(pergunta), MAX_PERGUNTAS, ficheiro);
-        debug += fwrite(ESTUDANTESC_FICHEIROSIO, 8, 1, ficheiro);
-        debug += fwrite(&avazio,sizeof(aluno), MAX_ALUNOS,ficheiro);
-        debug += fwrite(TREINOSC_FICHEIROSIO, 8, 1, ficheiro);
+        debug += fwrite(&PERGUNTASC_FICHEIROSIO, 1, 8, ficheiro);
+        for(unsigned f=0; f<MAX_PERGUNTAS; f++){
+            debug += fwrite(&vazia,sizeof(pergunta), 1, ficheiro);
+        }
+        debug += fwrite(&ESTUDANTESC_FICHEIROSIO, 1, 8, ficheiro);
+        for(unsigned f=0; f<MAX_ALUNOS; f++){
+            debug += fwrite(&avazio,sizeof(aluno), 1,ficheiro);
+        }
+        debug += fwrite(&TREINOSC_FICHEIROSIO, 1, 8, ficheiro);
         debug += fwrite(&tvazio, sizeof(treino), 1, ficheiro);
-        debug += fwrite(ENDC_FICHEIROSIO, 8, 1, ficheiro);
+        debug += fwrite(&ENDC_FICHEIROSIO, 1, 8, ficheiro);
         printf("\nEscritas: %d linhas", debug);
     }
     fclose(ficheiro);
@@ -62,4 +66,10 @@ void guardaTreino(treino treGrav){
 
     }
     
+}
+
+int main(int argc, char const *argv[])
+{
+    criaFichBinario();
+    return 0;
 }
