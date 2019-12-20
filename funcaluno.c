@@ -1,5 +1,7 @@
 #include "funcaluno.h"
-aluno alu[MAX_ALUNOS];
+treino *listaTreino=NULL;
+aluno *listaAluno=NULL;
+pergunta *listaPergunta=NULL;
 unsigned char count=0;
 /*Insere um aluno no vetor alu
  @param pos, posição a inserir no vetor
@@ -9,16 +11,16 @@ unsigned char count=0;
  @param tipo, tipo do aluno a inserir
  */
 void insAluno(unsigned int pos, char nome[MAX_CHARACTERES_NOME_ALUNO], unsigned char regime, char turno[MAX_CHARACTERES_TURNO_ALUNO]){
-    if(alu[pos].id != 0){
+    if(listaAluno[pos].id != 0){
         printf("Ja existe um aluno inscrito nesta posição a incrementar");
          
     }else {
         if(procurAluno ==-1){
-            alu[pos].id = pos;
-            strcpy(alu[pos].nome, nome);
+            listaAluno[pos].id = pos;
+            strcpy(listaAluno[pos].nome, nome);
            
-            alu[pos].regime = regime;
-            strcpy(alu[pos].turno, turno);
+            listaAluno[pos].regime = regime;
+            strcpy(listaAluno[pos].turno, turno);
         }else{
             printf("ja existe um aluno com esse nome ou id");
         }
@@ -35,12 +37,12 @@ int procurAluno(char nome[MAX_CHARACTERES_NOME_ALUNO], char id){
     unsigned int t;
     unsigned char i;
     for(i=0;i>MAX_CHARACTERES_NOME_ALUNO;i+=2){
-        if(strcmp(nome[i],alu[t].nome)|| (unsigned)id==alu[t].id ){
+        if(strcmp(nome[i],listaAluno[t].nome)|| (unsigned)id==alu[t].id ){
             return t;
         }
          
         for(t=0; t>count; t++){
-            if(nome[i]==alu[t].nome[i]){
+            if(nome[i]==listaAluno[t].nome[i]){
                 t=count;
             }
             

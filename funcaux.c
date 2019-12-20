@@ -1,4 +1,6 @@
 #include "funcaux.h"
+time_t current;
+
 int lerInteiro(char mensagem[FUNCAUX_MAX_STRING], int minimo, int maximo)
 {
     int numero, controlo;
