@@ -18,7 +18,7 @@ void guardaTreino(treino *treGrav){
         fclose(ficheiro);
         criaFichBinario();
     }else{
-
+        
     }
     
 }
