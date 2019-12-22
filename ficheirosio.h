@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "estruturas.h"
-void guardaTreino(treino *treGrav);
+#include "funcaluno.h"
+void guardaTreino(treino *treGrav, int size);
 void criaFichBinario();
 void forcaContaPerguntas();
 #endif

@@ -6,8 +6,10 @@
 
 void menu(){
 }
+char ta;
 int main(int argc, char const *argv[])
 {
-    
+  
+  
     return 0;
 }

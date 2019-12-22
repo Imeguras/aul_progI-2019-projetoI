@@ -11,19 +11,34 @@ FILE *ficheiro=NULL;
     Função usada para guardar um treino dentro do ficheiro binário data.dat
     @param trevGrav, estrutura do tipo treino a qual se pretende ser guardada
 */
-void guardaTreino(treino *treGrav){
+void guardaTreino(treino *treGrav, int size){
     ficheiro=fopen("treino.dat", "r+");
+    
     if(ficheiro==NULL){
         printf("Erro: O ficheiro treino.dat não existe a criar um novo");
         fclose(ficheiro);
         criaFichBinario();
     }else{
-        
+        for(int i =0; i<size; i++){
+            fwrite(treGrav,sizeof(treino), size, ficheiro);
+        }     
     }
     
 }
+void loadTreino(treino *trevGrav, int size){
+        ficheiro=fopen("treino.dat", "r+");
+        
+        if(ficheiro==NULL){
+            printf("Erro: O ficheiro treino.dat não existe a criar um novo");
+            fclose(ficheiro);
+            criaFichBinario();
+        }else{
+            for(int i =0; i<size; i++){
+                fread(trevGrav,sizeof(treino), size, ficheiro);
+            }     
+        }
+}
 void criaFichBinarioPergunta(){
-    //variaveis vazias
     size_t debug=0;
     ficheiro=fopen("pergunta.dat", "wb");
     if(ficheiro==NULL){
@@ -39,7 +54,6 @@ void criaFichBinarioPergunta(){
     fclose(ficheiro);
 }
 void criaFichBinarioTreino(){
-    //variaveis vazias
     size_t debug=0;
     ficheiro=fopen("treino.dat", "wb");
     if(ficheiro==NULL){
@@ -53,7 +67,6 @@ void criaFichBinarioTreino(){
     
 }
 void criaFichBinarioAluno(){
-    
     size_t debug=0;
     ficheiro=fopen("aluno.dat", "wb");
     if(ficheiro==NULL){
@@ -65,6 +78,5 @@ void criaFichBinarioAluno(){
             debug += fwrite(&avazio ,sizeof(aluno), 1, ficheiro);
         }
         printf("\nEscritas: %d linhas", debug);
-    }
-    
+    }   
 }
