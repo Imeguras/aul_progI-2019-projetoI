@@ -19,9 +19,7 @@ void guardaTreino(treino *treGrav, int size){
         fclose(ficheiro);
         criaFichBinario();
     }else{
-        for(int i =0; i<size; i++){
-            fwrite(treGrav,sizeof(treino), size, ficheiro);
-        }     
+            fwrite(treGrav,sizeof(treino), size, ficheiro);     
     }
     
 }
@@ -33,9 +31,7 @@ void loadTreino(treino *trevGrav, int size){
             fclose(ficheiro);
             criaFichBinario();
         }else{
-            for(int i =0; i<size; i++){
-                fread(trevGrav,sizeof(treino), size, ficheiro);
-            }     
+                fread(trevGrav,sizeof(treino), size, ficheiro);     
         }
 }
 void criaFichBinarioPergunta(){

@@ -5,6 +5,8 @@
 #include "estruturas.h"
 #include "funcaluno.h"
 void guardaTreino(treino *treGrav, int size);
-void criaFichBinario();
+void criaFichBinarioPergunta();
+void criaFichBinarioTreino();
+void criaFichBinarioAluno();
 void forcaContaPerguntas();
 #endif

@@ -9,7 +9,7 @@ void menu(){
 char ta;
 int main(int argc, char const *argv[])
 {
-  
-  
+    criaFichBinario();
+    criaFichTreino();
     return 0;
 }
