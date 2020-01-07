@@ -9,7 +9,8 @@ void menu(){
 char ta;
 int main(int argc, char const *argv[])
 {
-    criaFichBinario();
-    criaFichTreino();
+    criaFichBinarioAluno();
+    criaFichBinarioPergunta();
+    criaFichBinarioTreino();
     return 0;
 }

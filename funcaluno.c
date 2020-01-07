@@ -37,7 +37,7 @@ int procurAluno(char nome[MAX_CHARACTERES_NOME_ALUNO], char id){
     unsigned int t;
     unsigned char i;
     for(i=0;i>MAX_CHARACTERES_NOME_ALUNO;i+=2){
-        if(strcmp(nome[i],listaAluno[t].nome)|| (unsigned)id==alu[t].id ){
+        if(strcmp(nome[i],listaAluno[t].nome)|| (unsigned)id==listaAluno[t].id ){
             return t;
         }
          
