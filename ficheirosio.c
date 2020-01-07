@@ -13,20 +13,23 @@ void guardaTreino(treino *treGrav, int size){
         guardaTreino(treGrav,size);
     }else{
             fseek(ficheiro,0,SEEK_SET);
+            fwrite(&size, sizeof(int), 1, ficheiro);
             fwrite(treGrav,sizeof(treino), size, ficheiro);     
             fclose(ficheiro);
     }
     
 }
-void loadTreino(treino *trevGrav, int size){
+void loadTreino(treino *trevGrav){
+        int size=0;
         ficheiro=fopen("treino.dat", "r+");
         
         if(ficheiro==NULL){
             printf("Erro: O ficheiro treino.dat não existe a criar um novo");
             fclose(ficheiro);
             criaFichBinarioTreino();
-            loadTreino(trevGrav,size);
+            loadTreino(trevGrav);
         }else{
+            fread(&size, sizeof(int), 1, ficheiro);
             fread(trevGrav,sizeof(treino), size, ficheiro);     
             fclose(ficheiro);
         }
@@ -39,7 +42,8 @@ void criaFichBinarioTreino(){
         fclose(ficheiro);
     }else{
         treino tvazio ={0};
-        debug = fwrite(&tvazio ,sizeof(treino), 1, ficheiro); 
+        debug += fwrite(&debug, sizeof(int), 1, ficheiro);
+        debug += fwrite(&tvazio ,sizeof(treino), 1, ficheiro); 
         printf("\nEscritas: %d linhas", debug);
     }
     
@@ -56,20 +60,23 @@ void guardaPergunta(pergunta *trePer, int size){
         guardaPergunta(trePer,size);
     }else{
             fseek(ficheiro,0,SEEK_SET);
+            fwrite(&size, sizeof(int), 1, ficheiro);
             fwrite(trePer,sizeof(pergunta), size, ficheiro);     
             fclose(ficheiro);
     }
     
 }
-void loadPergunta(pergunta *trePer, int size){
+void loadPergunta(pergunta *trePer){
+        int size=0;
         ficheiro=fopen("pergunta.dat", "r+");
         
         if(ficheiro==NULL){
             printf("Erro: O ficheiro treino.dat não existe a criar um novo");
             fclose(ficheiro);
             criaFichBinarioPergunta();
-            loadPergunta(trePer,size);
+            loadPergunta(trePer);
         }else{
+            fread(&size, sizeof(int), 1, ficheiro);
             fread(trePer,sizeof(pergunta), size, ficheiro);     
             fclose(ficheiro);
         }
@@ -82,6 +89,7 @@ void criaFichBinarioPergunta(){
         fclose(ficheiro);
     }else{
         pergunta vazia ={0};
+        debug += fwrite(&debug, sizeof(int), 1, ficheiro);
         debug += fwrite(&vazia ,sizeof(pergunta), 1, ficheiro);
         printf("\nEscritas: %d linhas", debug);
     }
@@ -99,20 +107,23 @@ void guardaAluno(aluno *trePer, int size){
         guardaAluno(trePer,size);
     }else{
             fseek(ficheiro,0,SEEK_SET);
+            fwrite(&size, sizeof(int), 1, ficheiro);
             fwrite(trePer,sizeof(aluno), size, ficheiro);     
             fclose(ficheiro);
     }
     
 }
-void loadAluno(aluno *trePer, int size){
+void loadAluno(aluno *trePer){
+        int size;
         ficheiro=fopen("Aluno.dat", "r+");
         
         if(ficheiro==NULL){
             printf("Erro: O ficheiro treino.dat não existe a criar um novo");
             fclose(ficheiro);
             criaFichBinarioAluno();
-            loadAluno(trePer,size);
+            loadAluno(trePer);
         }else{
+            fread(&size, sizeof(int), 1, ficheiro);
             fread(trePer,sizeof(aluno), size, ficheiro);     
             fclose(ficheiro);
         }
@@ -126,6 +137,7 @@ void criaFichBinarioAluno(){
         fclose(ficheiro);
     }else{
         aluno avazio ={0};
+        debug += fwrite(&debug, sizeof(int), 1, ficheiro);
         debug += fwrite(&avazio ,sizeof(aluno), 1, ficheiro);
         printf("\nEscritas: %d linhas", debug);
     }   
