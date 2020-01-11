@@ -23,7 +23,7 @@ void insPergunta(int *tamanhoLista,int id, char enunciado[MAX_CHARACTERES_PERGUN
         }
 }
 void printaPerguntas(int size, pergunta *listaPerguntas){
-    for(int i=0;i<size;i++){
+    for(int i=1;i<=size;i++){
         
         printf("\nID: %d", listaPerguntas[i].id);
         printf("\n\tEnunciado: %s", listaPerguntas[i].strpergunta);

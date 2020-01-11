@@ -105,8 +105,8 @@ void menu(){
                         printf("\n%s", listaResposta[2].strresposta);
                         printf("\n%s", listaResposta[3].strresposta);
                         */
-                        insPergunta(&sizePergunta,countPergunta,(char *)enunciado,(resposta *)listaResposta,respostacerta, materia, exame, listaPergunta);
-                        ++countPergunta;
+                        insPergunta(&sizePergunta,++countPergunta,(char *)enunciado,(resposta *)listaResposta,respostacerta, materia, exame, listaPergunta);
+                        
                         //insPergunta(&sizePergunta,0,"0",listaResposta, 0,0,0,0,listaPergunta);
                         break;
                     case 2:
