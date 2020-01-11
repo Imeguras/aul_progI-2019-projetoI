@@ -6,24 +6,33 @@
 treino *listaTreino=NULL;
 aluno *listaAluno=NULL;
 pergunta *listaPergunta=NULL;
-int sizeTreino, sizeAluno, sizePergunta;
-int countTreino, countPergunta;
+int sizeTreino=0, sizeAluno=0, sizePergunta=0;
+int countTreino=1, countPergunta=1;
 void menu();
 int main(int argc, char const *argv[]){
-    sizeTreino=loadTreino(listaTreino,&countTreino);
-    sizeAluno=loadAluno(listaAluno);
-    sizePergunta=loadPergunta(listaPergunta,countPergunta);
+    //criaFichBinarioAluno();
+    //criaFichBinarioTreino();
+    criaFichBinarioPergunta();
+    //sizeTreino=loadTreino(listaTreino,&countTreino);
+    //sizeAluno=loadAluno(listaAluno);
+    listaPergunta=loadPergunta(listaPergunta,&sizePergunta,&countPergunta);
     menu();
-    guardaTreino(listaTreino,sizeTreino, countTreino);
-    guardaAluno(listaAluno,sizeAluno);
-    guardaPergunta(listaPergunta,sizePergunta, countPergunta);
-    free(listaTreino);
-    free(listaPergunta);
-    free(listaAluno);
+    //guardaTreino(listaTreino,sizeTreino, countTreino);
+    //guardaAluno(listaAluno,sizeAluno);
+    //guardaPergunta(listaPergunta,sizePergunta, countPergunta);
+    //free(listaTreino);
+    //free(listaPergunta);
+    //free(listaAluno);
     return 0;
 }
 void menu(){
     int opcao, submenu;
+    char enunciado[MAX_CHARACTERES_PERGUNTA_PERGUNTA];
+    int materia;
+    int exame;
+    resposta listaResposta[4];
+    int respostacerta;
+    int tipo;
     do{
         printf("0 - Sair\n");
         printf("1 - Perguntas\n");
@@ -56,15 +65,36 @@ void menu(){
                         printf("\n\nA voltar\n\n");
                         break;
                     case 1:
-                        char enunciado[MAX_CHARACTERES_PERGUNTA_PERGUNTA];
-                        resposta listaResposta[4];
+                        
                         lerString("Escreve o enunciado da pergunta: ",enunciado,MAX_CHARACTERES_PERGUNTA_PERGUNTA);
-                        int respostacerta = lerInteiro("Escreve o id da resposta certa", 1, MAX_ID);    
-                        int materia = lerInteiro("Escreve o id da resposta certa", 1, MAX_ID);    
-                        int exame = lerInteiro("Escreve o id da resposta certa", 1, MAX_ID);    
-                        int tipo = lerInteiro("Escreve o id da resposta certa", 1, MAX_ID);    
-
-                        insPergunta(&sizePergunta,countPergunta,enunciado,listaResposta,respostacerta, materia, exame, tipo, listaPergunta);
+                        respostacerta=lerInteiro("Escreve o id da resposta certa", 1, MAX_ID);    
+                        materia = lerInteiro("Escreve a materia", 1, MAX_ID);    
+                        exame = lerInteiro("Escreve o exame", 1, MAX_ID);    
+                        tipo = lerInteiro("Escreve o tipo", 1, MAX_ID);
+                        #pragma region im bored
+                                listaResposta[0].id=0;
+                                listaResposta[0].strresposta[0]='d';
+                                listaResposta[0].strresposta[1]='\0';
+                                listaResposta[1].id=0;
+                                listaResposta[1].strresposta[0]='d';
+                                listaResposta[1].strresposta[1]='\0';
+                                listaResposta[2].id=0;
+                                listaResposta[2].strresposta[0]='d';
+                                listaResposta[2].strresposta[1]='\0';
+                                listaResposta[3].id=0;
+                                listaResposta[3].strresposta[0]='d';
+                                listaResposta[3].strresposta[1]='\0';
+                        #pragma endregion 
+                        /*printf("\n%d",sizePergunta);
+                        printf("\n%d",countPergunta);
+                        printf("\n%s",enunciado);
+                        printf("\n%s", listaResposta[0].strresposta);
+                        printf("\n%s", listaResposta[1].strresposta);
+                        printf("\n%s", listaResposta[2].strresposta);
+                        printf("\n%s", listaResposta[3].strresposta);
+                        */
+                        insPergunta(&sizePergunta,countPergunta,(char *)enunciado,(resposta *)listaResposta,respostacerta, materia, exame, listaPergunta);
+                        //insPergunta(&sizePergunta,0,"0",listaResposta, 0,0,0,0,listaPergunta);
                         break;
                     case 2:
                         printf("\n2sub\n");

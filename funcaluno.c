@@ -4,21 +4,38 @@ unsigned char count=0;
 
 #pragma endregion
 #pragma region Perguntas
-void insPergunta(int *tamanhoLista,int id, char enunciado[MAX_CHARACTERES_PERGUNTA_PERGUNTA], resposta respostas[NUMERO_RESPOSTAS_PERGUNTA], int IDrespostacerta,int materia,int exame,int tipo, pergunta *listaPergunta){
+void insPergunta(int *tamanhoLista,int id, char enunciado[MAX_CHARACTERES_PERGUNTA_PERGUNTA], resposta respostas[NUMERO_RESPOSTAS_PERGUNTA], int IDrespostacerta,int materia,int exame, pergunta *listaPergunta){
+        printf("works");
         if(*tamanhoLista==MAX_PERGUNTAS){
             printf("Lista cheia");
         }else{
-            int i;
-            *tamanhoLista+=1;     
-            listaPergunta[*tamanhoLista].id = id;
+            int i,t;
+            *tamanhoLista+=1;
+            t=*tamanhoLista;     
+            listaPergunta[t].id = id;
             strcpy(listaPergunta[*tamanhoLista].strpergunta, enunciado);
             for(i=0; i<NUMERO_RESPOSTAS_PERGUNTA; i++){
                listaPergunta[*tamanhoLista].mulrespostas[i]=respostas[i];
             }
             listaPergunta[*tamanhoLista].materia= materia;
-            listaPergunta[*tamanhoLista].tipo= tipo;
+            
             listaPergunta[*tamanhoLista].exame= exame;
         }
+}
+void printaPerguntas(int size, pergunta *listaPerguntas){
+    for(int i=0;i<size;i++){
+        
+        printf("\nID: %d", listaPerguntas[size].id);
+        printf("\n\tEnunciado: %s", listaPerguntas[size].strpergunta);
+        printf("\n\tRespostas:");
+        for(int j=0; j<NUMERO_RESPOSTAS_PERGUNTA; j++){
+            printf("\n\t\tID da resposta %d: %d",j, listaPerguntas[size].mulrespostas[j].id);
+            printf("\n\t\tFrase da resposta %d: %s",j, listaPerguntas[size].mulrespostas[j].strresposta);
+        }
+        pergunta da;
+        
+        printf("\n\t");
+    }
 }
 #pragma endregion 
 #pragma region Aluno

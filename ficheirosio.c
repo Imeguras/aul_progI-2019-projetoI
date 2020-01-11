@@ -4,7 +4,7 @@ FILE *ficheiro=NULL;
 
 #pragma region Treino
 void guardaTreino(treino *treGrav, int size, int count){
-    ficheiro=fopen("treino.dat", "r+");
+    ficheiro=fopen("treino.dat", "r+b");
     
     if(ficheiro==NULL){
         printf("Erro: O ficheiro treino.dat não existe a criar um novo");
@@ -20,44 +20,46 @@ void guardaTreino(treino *treGrav, int size, int count){
     }
     
 }
-int loadTreino(treino *trevGrav, int *count){
-        int size=0;
-        ficheiro=fopen("treino.dat", "r+");
+treino *loadTreino(treino *trevGrav, int *size, int *count){
         
+        
+        ficheiro=fopen("treino.dat", "r+b");
         if(ficheiro==NULL){
             printf("Erro: O ficheiro treino.dat não existe a criar um novo");
             fclose(ficheiro);
             criaFichBinarioTreino();
-            loadTreino(trevGrav, count);
+            loadTreino(trevGrav,size, count);
         }else{
-            fread(&size, sizeof(int), 1, ficheiro);
+            fread(size, sizeof(int), 1, ficheiro);
             fread(count, sizeof(int), 1, ficheiro);
-            trevGrav=realloc(trevGrav,sizeof(treino)*size);
+            trevGrav=realloc(trevGrav,sizeof(treino)*(*size));
             if(size!=0){
-                fread(trevGrav,sizeof(treino), size, ficheiro);  
+                fread(trevGrav,sizeof(treino), *size, ficheiro);  
             }   
             fclose(ficheiro);
-            return size;
         }
+        return trevGrav;
 }
 void criaFichBinarioTreino(){
     size_t debug=0;
     ficheiro=fopen("treino.dat", "wb");
     if(ficheiro==NULL){
         printf("\nAlgo correu mal com a criação do ficheiro");
-        fclose(ficheiro);
+        //fclose(ficheiro);
     }else{
         treino tvazio ={0};
-        debug += fwrite(&debug, sizeof(int), 1, ficheiro);
+        debug += fwrite(&tvazio.id, sizeof(int), 1, ficheiro);
+        debug += fwrite(&tvazio.id, sizeof(int), 1, ficheiro);
         debug += fwrite(&tvazio ,sizeof(treino), 1, ficheiro); 
         printf("\nEscritas: %d linhas", debug);
+        fclose(ficheiro);
     }
     
 }
 #pragma endregion 
 #pragma region Pergunta
 void guardaPergunta(pergunta *trePer, int size, int count){
-    ficheiro=fopen("pergunta.dat", "r+");
+    ficheiro=fopen("pergunta.dat", "r+b");
     
     if(ficheiro==NULL){
         printf("Erro: O ficheiro treino.dat não existe a criar um novo");
@@ -74,25 +76,26 @@ void guardaPergunta(pergunta *trePer, int size, int count){
     }
     
 }
-int loadPergunta(pergunta *trePer, int *count){
-        int size=0;
-        ficheiro=fopen("pergunta.dat", "r+");
+pergunta *loadPergunta(pergunta *trePer,int *size, int *count){
+       
+        ficheiro=fopen("pergunta.dat", "r+b");
         
         if(ficheiro==NULL){
             printf("Erro: O ficheiro treino.dat não existe a criar um novo");
             fclose(ficheiro);
             criaFichBinarioPergunta();
-            loadPergunta(trePer, count);
+            loadPergunta(trePer, size, count);
         }else{
-            fread(&size, sizeof(int), 1, ficheiro);
+            fread(size, sizeof(int), 1, ficheiro);
             fread(count, sizeof(int), 1, ficheiro);
-            trePer=realloc(trePer,sizeof(pergunta)*size);
+            trePer=realloc(trePer,sizeof(pergunta)*(*size));
             if(size!=0){
-                fread(trePer,sizeof(pergunta), size, ficheiro);
+                fread(trePer,sizeof(pergunta), *size, ficheiro);
             }     
             fclose(ficheiro);
-            return size;
+            
         }
+        return trePer;
 }
 void criaFichBinarioPergunta(){
     size_t debug=0;
@@ -102,16 +105,18 @@ void criaFichBinarioPergunta(){
         fclose(ficheiro);
     }else{
         pergunta vazia ={0};
-        debug += fwrite(&debug, sizeof(int), 1, ficheiro);
+        debug += fwrite(&debug, sizeof(int), 1, ficheiro);//debug -0
+        debug += fwrite(&debug, sizeof(int), 1, ficheiro);//debug -1
         debug += fwrite(&vazia ,sizeof(pergunta), 1, ficheiro);
         printf("\nEscritas: %d linhas", debug);
+        fclose(ficheiro);
     }
-    fclose(ficheiro);
+    
 }
 #pragma endregion
 #pragma region Aluno
 void guardaAluno(aluno *trePer, int size){
-    ficheiro=fopen("Aluno.dat", "r+");
+    ficheiro=fopen("aluno.dat", "r+b");
     
     if(ficheiro==NULL){
         printf("Erro: O ficheiro treino.dat não existe a criar um novo");
@@ -126,24 +131,25 @@ void guardaAluno(aluno *trePer, int size){
     }
     
 }
-int loadAluno(aluno *trePer){
-        int size;
-        ficheiro=fopen("Aluno.dat", "r+");
+aluno *loadAluno(aluno *trePer, int *size){
+        
+        ficheiro=fopen("Aluno.dat", "r+b");
         
         if(ficheiro==NULL){
             printf("Erro: O ficheiro treino.dat não existe a criar um novo");
             fclose(ficheiro);
             criaFichBinarioAluno();
-            loadAluno(trePer);
+            loadAluno(trePer, size);
         }else{
-            fread(&size, sizeof(int), 1, ficheiro);
-            trePer=realloc(trePer,sizeof(aluno)*size);
+            fread(size, sizeof(int), 1, ficheiro);
+            trePer=realloc(trePer,sizeof(aluno)*(*size));
             if(size!=0){
-                fread(trePer,sizeof(aluno), size, ficheiro); 
+                fread(trePer,sizeof(aluno), *size, ficheiro); 
             }    
             fclose(ficheiro);
-            return size;
+           
         }
+        return trePer;
 }
 void criaFichBinarioAluno(){
     size_t debug=0;
@@ -155,8 +161,10 @@ void criaFichBinarioAluno(){
     }else{
         aluno avazio ={0};
         debug += fwrite(&debug, sizeof(int), 1, ficheiro);
+        debug += fwrite(&avazio.id, sizeof(int), 1, ficheiro);
         debug += fwrite(&avazio ,sizeof(aluno), 1, ficheiro);
         printf("\nEscritas: %d linhas", debug);
+        fclose(ficheiro);
     }   
 }
 #pragma endregion

@@ -24,12 +24,9 @@ typedef struct{
     int respostacerta;
     int materia;  
     int exame;
-    int tipo;   
 }pergunta;
 typedef struct{
-    int id;
-    struct tm tempoDeInicio;
-    struct tm tempoDeFim; 
+    int id; 
     int minutosDur;
     int prova;
     int estado;
