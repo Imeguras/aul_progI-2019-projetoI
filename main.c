@@ -7,16 +7,16 @@ treino *listaTreino=NULL;
 aluno *listaAluno=NULL;
 pergunta *listaPergunta=NULL;
 int sizeTreino, sizeAluno, sizePergunta;
-int countTreino, countAluno, countPergunta, countRespostas;
+int countTreino, countPergunta;
 void menu();
 int main(int argc, char const *argv[]){
-    sizeTreino=loadTreino(listaTreino);
+    sizeTreino=loadTreino(listaTreino,&countTreino);
     sizeAluno=loadAluno(listaAluno);
-    sizePergunta=loadPergunta(listaPergunta);
+    sizePergunta=loadPergunta(listaPergunta,countPergunta);
     menu();
-    guardaTreino(listaTreino,sizeTreino);
+    guardaTreino(listaTreino,sizeTreino, countTreino);
     guardaAluno(listaAluno,sizeAluno);
-    guardaPergunta(listaPergunta,sizePergunta);
+    guardaPergunta(listaPergunta,sizePergunta, countPergunta);
     free(listaTreino);
     free(listaPergunta);
     free(listaAluno);
@@ -59,9 +59,12 @@ void menu(){
                         char enunciado[MAX_CHARACTERES_PERGUNTA_PERGUNTA];
                         resposta listaResposta[4];
                         lerString("Escreve o enunciado da pergunta: ",enunciado,MAX_CHARACTERES_PERGUNTA_PERGUNTA);
-                        lerInteiro("Escreve o id da resposta certa", 1,)    
-    
-                        insPergunta(&sizePergunta,countPergunta,enunciado,listaResposta,);
+                        int respostacerta = lerInteiro("Escreve o id da resposta certa", 1, MAX_ID);    
+                        int materia = lerInteiro("Escreve o id da resposta certa", 1, MAX_ID);    
+                        int exame = lerInteiro("Escreve o id da resposta certa", 1, MAX_ID);    
+                        int tipo = lerInteiro("Escreve o id da resposta certa", 1, MAX_ID);    
+                        
+                        insPergunta(&sizePergunta,countPergunta,enunciado,listaResposta,respostacerta, materia, exame, tipo, listaPergunta);
                         break;
                     case 2:
                         printf("\n2sub\n");

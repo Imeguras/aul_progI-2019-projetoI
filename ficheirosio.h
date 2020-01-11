@@ -4,12 +4,12 @@
 #include <stdio.h>
 #include "estruturas.h"
 #include "funcaluno.h"
-void guardaTreino(treino *treGrav, int size);
-int loadTreino(treino *trevGrav);
+void guardaTreino(treino *treGrav, int size, int count);
+int loadTreino(treino *trevGrav, int *count);
 int loadAluno(aluno *trePer);
 void guardaAluno(aluno *trePer, int size);
-void guardaPergunta(pergunta *trePer, int size);
-int loadPergunta(pergunta *trePer);
+void guardaPergunta(pergunta *trePer, int size, int count);
+int loadPergunta(pergunta *trePer, int *count);
 void criaFichBinarioPergunta();
 void criaFichBinarioTreino();
 void criaFichBinarioAluno();
