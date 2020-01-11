@@ -12,16 +12,16 @@ void menu();
 int main(int argc, char const *argv[]){
     //criaFichBinarioAluno();
     //criaFichBinarioTreino();
-    criaFichBinarioPergunta();
+    //criaFichBinarioPergunta();
     //sizeTreino=loadTreino(listaTreino,&countTreino);
     //sizeAluno=loadAluno(listaAluno);
     listaPergunta=loadPergunta(listaPergunta,&sizePergunta,&countPergunta);
     menu();
     //guardaTreino(listaTreino,sizeTreino, countTreino);
     //guardaAluno(listaAluno,sizeAluno);
-    //guardaPergunta(listaPergunta,sizePergunta, countPergunta);
+    guardaPergunta(listaPergunta,sizePergunta, countPergunta);
     //free(listaTreino);
-    //free(listaPergunta);
+    free(listaPergunta);
     //free(listaAluno);
     return 0;
 }
