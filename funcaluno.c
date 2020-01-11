@@ -1,8 +1,27 @@
 #include "funcaluno.h"
-treino *listaTreino=NULL;
-aluno *listaAluno=NULL;
-pergunta *listaPergunta=NULL;
 unsigned char count=0;
+#pragma region respostas
+
+#pragma endregion
+#pragma region Perguntas
+void insPergunta(int *tamanhoLista,int id, char enunciado[MAX_CHARACTERES_PERGUNTA_PERGUNTA], resposta respostas[NUMERO_RESPOSTAS_PERGUNTA], int IDrespostacerta,int materia,int exame,int tipo, pergunta *listaPergunta){
+        if(*tamanhoLista==MAX_PERGUNTAS){
+            printf("Lista cheia");
+        }else{
+            int i;
+            *tamanhoLista+=1;     
+            listaPergunta[*tamanhoLista].id = id;
+            strcpy(listaPergunta[*tamanhoLista].strpergunta, enunciado);
+            for(i=0; i<NUMERO_RESPOSTAS_PERGUNTA; i++){
+               listaPergunta[*tamanhoLista].mulrespostas[i]=respostas[i];
+            }
+            listaPergunta[*tamanhoLista].materia= materia;
+            listaPergunta[*tamanhoLista].tipo= tipo;
+            listaPergunta[*tamanhoLista].exame= exame;
+        }
+}
+#pragma endregion 
+#pragma region Aluno
 /*Insere um aluno no vetor alu
  @param pos, posição a inserir no vetor
  @param nome, nome do aluno a inserir
@@ -10,22 +29,21 @@ unsigned char count=0;
  @param turno, turno do aluno a inserir
  @param tipo, tipo do aluno a inserir
  */
-void insAluno(unsigned int pos, char nome[MAX_CHARACTERES_NOME_ALUNO], unsigned char regime, char turno[MAX_CHARACTERES_TURNO_ALUNO]){
-    if(listaAluno[pos].id != 0){
-        printf("Ja existe um aluno inscrito nesta posição a incrementar");
-         
-    }else {
-        if(procurAluno ==-1){
-            listaAluno[pos].id = pos;
-            strcpy(listaAluno[pos].nome, nome);
-           
-            listaAluno[pos].regime = regime;
-            strcpy(listaAluno[pos].turno, turno);
+void insAluno(unsigned int pos, char nome[MAX_CHARACTERES_NOME_ALUNO], unsigned char regime, char turno[MAX_CHARACTERES_TURNO_ALUNO], aluno *listaAluno){
+     if(procurAluno(nome,-1,listaAluno) ==-1){
+            if(listaAluno[pos].id != 0){
+                printf("Ja existe um aluno inscrito nesta posição a incrementar");
+            }else {
+                listaAluno[pos].id = pos;
+                strcpy(listaAluno[pos].nome, nome);
+            
+                listaAluno[pos].regime = regime;
+                strcpy(listaAluno[pos].turno, turno);
+            }
         }else{
             printf("ja existe um aluno com esse nome ou id");
         }
-    
-    }
+   
     
 }
 /*
@@ -33,7 +51,7 @@ void insAluno(unsigned int pos, char nome[MAX_CHARACTERES_NOME_ALUNO], unsigned 
     @param nome, vetor de letras ao qual a função tentara encontrar um aluno no vetor alu que tenha o campo nome igual, enviar um vetor nulo se nao for relevante procurar pelo nome
     @param id, character usado como numero inteiro ao qual a função tentara encontrar um aluno no vetor alu que tenha o campo id igual, enviar o valor -1 se nao for relevante procurar pelo id
     */
-int procurAluno(char nome[MAX_CHARACTERES_NOME_ALUNO], char id){
+int procurAluno(char nome[MAX_CHARACTERES_NOME_ALUNO], char id, aluno *listaAluno){
     unsigned int t;
     unsigned char i;
     for(i=0;i>MAX_CHARACTERES_NOME_ALUNO;i+=2){
@@ -54,3 +72,4 @@ int procurAluno(char nome[MAX_CHARACTERES_NOME_ALUNO], char id){
 void altAluno(unsigned int pos){
     
 }
+#pragma endregion

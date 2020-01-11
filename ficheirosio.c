@@ -19,7 +19,7 @@ void guardaTreino(treino *treGrav, int size){
     }
     
 }
-void loadTreino(treino *trevGrav){
+int loadTreino(treino *trevGrav){
         int size=0;
         ficheiro=fopen("treino.dat", "r+");
         
@@ -30,8 +30,12 @@ void loadTreino(treino *trevGrav){
             loadTreino(trevGrav);
         }else{
             fread(&size, sizeof(int), 1, ficheiro);
-            fread(trevGrav,sizeof(treino), size, ficheiro);     
+            trevGrav=realloc(trevGrav,sizeof(treino)*size);
+            if(size!=0){
+                fread(trevGrav,sizeof(treino), size, ficheiro);  
+            }   
             fclose(ficheiro);
+            return size;
         }
 }
 void criaFichBinarioTreino(){
@@ -61,12 +65,13 @@ void guardaPergunta(pergunta *trePer, int size){
     }else{
             fseek(ficheiro,0,SEEK_SET);
             fwrite(&size, sizeof(int), 1, ficheiro);
-            fwrite(trePer,sizeof(pergunta), size, ficheiro);     
+            fwrite(trePer,sizeof(pergunta), size, ficheiro); 
+                
             fclose(ficheiro);
     }
     
 }
-void loadPergunta(pergunta *trePer){
+int loadPergunta(pergunta *trePer){
         int size=0;
         ficheiro=fopen("pergunta.dat", "r+");
         
@@ -77,8 +82,12 @@ void loadPergunta(pergunta *trePer){
             loadPergunta(trePer);
         }else{
             fread(&size, sizeof(int), 1, ficheiro);
-            fread(trePer,sizeof(pergunta), size, ficheiro);     
+            trePer=realloc(trePer,sizeof(pergunta)*size);
+            if(size!=0){
+                fread(trePer,sizeof(pergunta), size, ficheiro);
+            }     
             fclose(ficheiro);
+            return size;
         }
 }
 void criaFichBinarioPergunta(){
@@ -108,12 +117,12 @@ void guardaAluno(aluno *trePer, int size){
     }else{
             fseek(ficheiro,0,SEEK_SET);
             fwrite(&size, sizeof(int), 1, ficheiro);
-            fwrite(trePer,sizeof(aluno), size, ficheiro);     
+            fwrite(trePer,sizeof(aluno), size, ficheiro); 
             fclose(ficheiro);
     }
     
 }
-void loadAluno(aluno *trePer){
+int loadAluno(aluno *trePer){
         int size;
         ficheiro=fopen("Aluno.dat", "r+");
         
@@ -124,8 +133,12 @@ void loadAluno(aluno *trePer){
             loadAluno(trePer);
         }else{
             fread(&size, sizeof(int), 1, ficheiro);
-            fread(trePer,sizeof(aluno), size, ficheiro);     
+            trePer=realloc(trePer,sizeof(aluno)*size);
+            if(size!=0){
+                fread(trePer,sizeof(aluno), size, ficheiro); 
+            }    
             fclose(ficheiro);
+            return size;
         }
 }
 void criaFichBinarioAluno(){

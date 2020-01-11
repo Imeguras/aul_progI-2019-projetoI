@@ -5,11 +5,11 @@
 #include "estruturas.h"
 #include "funcaluno.h"
 void guardaTreino(treino *treGrav, int size);
-void loadTreino(treino *trevGrav);
-void loadAluno(aluno *trePer);
+int loadTreino(treino *trevGrav);
+int loadAluno(aluno *trePer);
 void guardaAluno(aluno *trePer, int size);
 void guardaPergunta(pergunta *trePer, int size);
-void loadPergunta(pergunta *trePer);
+int loadPergunta(pergunta *trePer);
 void criaFichBinarioPergunta();
 void criaFichBinarioTreino();
 void criaFichBinarioAluno();
