@@ -32,9 +32,10 @@ void printaPerguntas(int size, pergunta *listaPerguntas){
             printf("\n\t\tID da resposta %d: %d",j, listaPerguntas[size].mulrespostas[j].id);
             printf("\n\t\tFrase da resposta %d: %s",j, listaPerguntas[size].mulrespostas[j].strresposta);
         }
-        pergunta da;
+        printf("\n\tResposta Certa: %d",listaPerguntas[size].respostacerta);
+        printf("\n\tMateria: %d",listaPerguntas[size].materia);
+        printf("\n\tExame: %d",listaPerguntas[size].exame);
         
-        printf("\n\t");
     }
 }
 #pragma endregion 

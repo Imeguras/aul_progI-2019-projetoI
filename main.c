@@ -102,6 +102,9 @@ void menu(){
                     case 3:
                         printf("\n3sub\n");
                         break;
+                    case 4:
+                        printaPerguntas(sizePergunta, listaPergunta);
+                        break;
                     default:
                         printf("\nOpcao invalida\n");
                 }
