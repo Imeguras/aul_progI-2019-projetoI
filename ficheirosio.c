@@ -88,7 +88,7 @@ pergunta *loadPergunta(pergunta *trePer,int *size, int *count){
         }else{
             fread(size, sizeof(int), 1, ficheiro);
             fread(count, sizeof(int), 1, ficheiro);
-            trePer=realloc(trePer,sizeof(pergunta)*(*size));
+            trePer=realloc(trePer,sizeof(pergunta)*MAX_PERGUNTAS);
             if(size!=0){
                 fread(trePer,sizeof(pergunta), *size, ficheiro);
             }     

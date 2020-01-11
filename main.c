@@ -10,9 +10,9 @@ int sizeTreino=0, sizeAluno=0, sizePergunta=0;
 int countTreino=1, countPergunta=1;
 void menu();
 int main(int argc, char const *argv[]){
-    //criaFichBinarioAluno();
-    //criaFichBinarioTreino();
-    //criaFichBinarioPergunta();
+    criaFichBinarioAluno();
+    criaFichBinarioTreino();
+    criaFichBinarioPergunta();
     //sizeTreino=loadTreino(listaTreino,&countTreino);
     //sizeAluno=loadAluno(listaAluno);
     listaPergunta=loadPergunta(listaPergunta,&sizePergunta,&countPergunta);
@@ -106,6 +106,7 @@ void menu(){
                         printf("\n%s", listaResposta[3].strresposta);
                         */
                         insPergunta(&sizePergunta,countPergunta,(char *)enunciado,(resposta *)listaResposta,respostacerta, materia, exame, listaPergunta);
+                        ++countPergunta;
                         //insPergunta(&sizePergunta,0,"0",listaResposta, 0,0,0,0,listaPergunta);
                         break;
                     case 2:
