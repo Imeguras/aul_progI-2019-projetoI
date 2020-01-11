@@ -25,6 +25,7 @@ int main(int argc, char const *argv[]){
     //free(listaAluno);
     return 0;
 }
+
 void menu(){
     int opcao, submenu;
     char enunciado[MAX_CHARACTERES_PERGUNTA_PERGUNTA];
@@ -33,26 +34,35 @@ void menu(){
     resposta listaResposta[4];
     int respostacerta;
     int tipo;
-    do{
+    do
+    {
+        printf("Quantidade de estudantes: %d\n", sizeAluno);
+        printf("Quantidade de perguntas: %d\n", sizePergunta);
+        printf("Quantidade de treinos realizados: %d\n", sizeTreino);
+        printf("Quantidade de treinos a decorrer: %d\n", sizeTreino);
+        printf("\n---------------Menu---------------\n\n");
         printf("0 - Sair\n");
         printf("1 - Perguntas\n");
         printf("2 - Dados dos estudantes\n");
         printf("3 - Treinos\n");
-        printf("4 - \n");
-        printf("5 - \n");
+        printf("4 - Rankings\n");
+        printf("5 - Dados Estatisticos\n");
         printf("6 - \n");
         printf("7 - \n");
 
         printf("Opcao: ");
         scanf("%d", &opcao);
 
-        switch(opcao){
+        switch(opcao)
+        {
         case 0:
             printf("\n\tA sair do programa.\n");
             break;
         case 1:
-            do{
-                printf("0 - Voltar\n");
+            do
+            {
+        
+               printf("0 - Voltar\n");
                 printf("1 - Inserir\n");
                 printf("2 - Consultar\n");
                 printf("3 - Alterar\n");
@@ -60,10 +70,12 @@ void menu(){
                 printf("Opcao: ");
                 scanf("%d", &submenu);
 
-                switch(submenu){
-                    case 0:
-                        printf("\n\nA voltar\n\n");
-                        break;
+                switch(submenu)
+                {
+                case 0:
+                    printf("\n\nA voltar\n\n");
+                    break;
+               
                     case 1:
                         
                         lerString("Escreve o enunciado da pergunta: ",enunciado,MAX_CHARACTERES_PERGUNTA_PERGUNTA);
@@ -165,7 +177,42 @@ void menu(){
             printf("\n4\n");
             break;
         case 5:
-            printf("\n5\n");
+            do
+            {
+                printf("0 - Voltar\n");
+                printf("1 - O tempo medio de resposta a uma pergunta\n");
+                printf("2 - Quantidade de treinos realizados entre duas datas\n");
+                printf("3 - Percentagem de treinos efetuados por cada prova\n");
+                printf("4 - Pergunta com a maior quantidade de respostas erradas\n");
+                printf("5 - Tipo de perguntas com a menor percentagem de respostas corretas\n");
+                printf("Opcao: ");
+                scanf("%d", &submenu);
+
+                switch(submenu)
+                {
+                case 0:
+                    printf("\n\nA voltar\n\n");
+                    break;
+                case 1:
+                    printf("\n1sub\n");
+                    break;
+                case 2:
+                    printf("\n2sub\n");
+                    break;
+                case 3:
+                    printf("\n3sub\n");
+                    break;
+                case 4:
+                    printf("\n4sub\n");
+                    break;
+                case 5:
+                    printf("\n5sub\n");
+                    break;
+                default:
+                    printf("\nOpcao invalida\n");
+                }
+            }
+            while(submenu != 0);
             break;
         case 6:
             printf("\n6\n");
