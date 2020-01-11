@@ -25,16 +25,16 @@ void insPergunta(int *tamanhoLista,int id, char enunciado[MAX_CHARACTERES_PERGUN
 void printaPerguntas(int size, pergunta *listaPerguntas){
     for(int i=0;i<size;i++){
         
-        printf("\nID: %d", listaPerguntas[size].id);
-        printf("\n\tEnunciado: %s", listaPerguntas[size].strpergunta);
+        printf("\nID: %d", listaPerguntas[i].id);
+        printf("\n\tEnunciado: %s", listaPerguntas[i].strpergunta);
         printf("\n\tRespostas:");
         for(int j=0; j<NUMERO_RESPOSTAS_PERGUNTA; j++){
-            printf("\n\t\tID da resposta %d: %d",j, listaPerguntas[size].mulrespostas[j].id);
-            printf("\n\t\tFrase da resposta %d: %s",j, listaPerguntas[size].mulrespostas[j].strresposta);
+            printf("\n\t\tID da resposta %d: %d",j, listaPerguntas[i].mulrespostas[j].id);
+            printf("\n\t\tFrase da resposta %d: %s",j, listaPerguntas[i].mulrespostas[j].strresposta);
         }
-        printf("\n\tResposta Certa: %d",listaPerguntas[size].respostacerta);
-        printf("\n\tMateria: %d",listaPerguntas[size].materia);
-        printf("\n\tExame: %d",listaPerguntas[size].exame);
+        printf("\n\tResposta Certa: %d",listaPerguntas[i].respostacerta);
+        printf("\n\tMateria: %d",listaPerguntas[i].materia);
+        printf("\n\tExame: %d",listaPerguntas[i].exame);
         
     }
 }

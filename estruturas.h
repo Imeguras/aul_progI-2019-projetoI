@@ -8,7 +8,7 @@ typedef struct
    int id;
    char nome[MAX_CHARACTERES_NOME_ALUNO];
    int regime;
-   int turno[MAX_CHARACTERES_TURNO_ALUNO];
+   char turno[MAX_CHARACTERES_TURNO_ALUNO];
    int treinosComp;
    int respostasTotais;
    int respostasCertas;
