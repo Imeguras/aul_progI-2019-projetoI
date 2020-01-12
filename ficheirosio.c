@@ -133,8 +133,7 @@ void guardaAluno(aluno *trePer, int size){
 }
 aluno *loadAluno(aluno *trePer, int *size){
         
-        ficheiro=fopen("Aluno.dat", "r+b");
-        
+        ficheiro=fopen("aluno.dat", "r+b");
         if(ficheiro==NULL){
             printf("Erro: O ficheiro treino.dat não existe a criar um novo");
             fclose(ficheiro);
@@ -142,7 +141,7 @@ aluno *loadAluno(aluno *trePer, int *size){
             loadAluno(trePer, size);
         }else{
             fread(size, sizeof(int), 1, ficheiro);
-            trePer=realloc(trePer,sizeof(aluno)*(*size));
+            trePer=realloc(trePer,sizeof(aluno)*MAX_ALUNOS);
             if(size!=0){
                 fread(trePer,sizeof(aluno), *size, ficheiro); 
             }    
