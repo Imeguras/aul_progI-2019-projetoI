@@ -37,7 +37,8 @@ void menu(){
     int IDal;
     char nome[MAX_CHARACTERES_NOME_ALUNO];
     int regime;
-    char turno[4]; 
+    char turno[4];
+    #pragma region NORMAL 
     do
     {
         printf("Quantidade de estudantes: %d\n", sizeAluno);
@@ -63,6 +64,7 @@ void menu(){
         case '0':
             printf("\n\tA sair do programa.\n");
             break;
+        #pragma endregion 
         case '1':
             do
             {
@@ -83,10 +85,9 @@ void menu(){
                     break;
 
                     case '1':
-
-                        
                         lerString("Escreve o enunciado da pergunta: ",enunciado,MAX_CHARACTERES_PERGUNTA_PERGUNTA);
-                        respostacerta=lerInteiro("Escreve o id da resposta certa", 1, MAX_ID);    
+                        respostacerta = lerInteiro("Escreve o qual das respostas esta certa", 1, NUMERO_RESPOSTAS_PERGUNTA);
+                        int idRespostaCerta = sizePergunta * 10 + respostacerta-1;
                         materia = lerInteiro("Escreve a materia", 1, MAX_ID);    
                         exame = lerInteiro("Escreve o exame", 1, MAX_ID);    
                         #pragma region im bored
