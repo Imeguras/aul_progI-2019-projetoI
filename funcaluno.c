@@ -1,6 +1,31 @@
 #include "funcaluno.h"
+
 unsigned char count=0;
-#pragma region respostas
+#pragma region treinos
+/*typedef struct{
+    int id;
+    int IDaluno; 
+    int minutosDur;
+    int prova;
+    int estado;
+    int numperg;
+    int numdaserradas;
+    pergunta per[10];
+    resposta respostasDadas[10];
+    float nota; 
+}treino;*/
+//Estado 256 indica por fazer
+treino *criaTreino(int id, int IDaluno, int prova, int numperg, treino *listaTreino){
+    ++id;
+    listaTreino=realloc(listaTreino,(id)*sizeof(treino));
+    listaTreino[id].id=id;
+    listaTreino[id].estado=256;
+    listaTreino[id].IDaluno= IDaluno;
+    listaTreino[id].numperg=numperg;
+    listaTreino[id].prova=prova;
+    
+    return listaTreino;
+}    
 
 #pragma endregion
 #pragma region Perguntas
