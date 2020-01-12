@@ -54,9 +54,11 @@ void insAluno(unsigned int pos, char nome[MAX_CHARACTERES_NOME_ALUNO], unsigned 
             }else {
                 listaAluno[pos].id = pos;
                 strcpy(listaAluno[pos].nome, nome);
-            
                 listaAluno[pos].regime = regime;
                 strcpy(listaAluno[pos].turno, turno);
+                listaAluno[pos].respostasCertas=0;
+                listaAluno[pos].respostasTotais=0;
+                listaAluno[pos].treinosComp=0; 
             }
         }else{
             printf("ja existe um aluno com esse nome ou id");

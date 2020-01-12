@@ -14,15 +14,15 @@ int main(int argc, char const *argv[]){
     criaFichBinarioTreino();
     criaFichBinarioPergunta();
     //sizeTreino=loadTreino(listaTreino,&countTreino);
-    //sizeAluno=loadAluno(listaAluno);
+    listaAluno=loadAluno(listaAluno,&sizeAluno);
     listaPergunta=loadPergunta(listaPergunta,&sizePergunta,&countPergunta);
     menu();
     //guardaTreino(listaTreino,sizeTreino, countTreino);
-    //guardaAluno(listaAluno,sizeAluno);
+    guardaAluno(listaAluno,sizeAluno);
     guardaPergunta(listaPergunta,sizePergunta, countPergunta);
     //free(listaTreino);
     free(listaPergunta);
-    //free(listaAluno);
+    free(listaAluno);
     return 0;
 }
 
@@ -33,9 +33,10 @@ void menu(){
     int exame;
     resposta listaResposta[4];
     int respostacerta;
-    int tipo;
-    do
-    {
+    char nome[MAX_CHARACTERES_NOME_ALUNO];
+    int regime;
+    char turno[4]; 
+    do{
         printf("Quantidade de estudantes: %d\n", sizeAluno);
         printf("Quantidade de perguntas: %d\n", sizePergunta);
         printf("Quantidade de treinos realizados: %d\n", sizeTreino);
@@ -62,7 +63,7 @@ void menu(){
             do
             {
         
-               printf("0 - Voltar\n");
+               printf("\n0 - Voltar\n");
                 printf("1 - Inserir\n");
                 printf("2 - Consultar\n");
                 printf("3 - Alterar\n");
@@ -82,7 +83,6 @@ void menu(){
                         respostacerta=lerInteiro("Escreve o id da resposta certa", 1, MAX_ID);    
                         materia = lerInteiro("Escreve a materia", 1, MAX_ID);    
                         exame = lerInteiro("Escreve o exame", 1, MAX_ID);    
-                        tipo = lerInteiro("Escreve o tipo", 1, MAX_ID);
                         #pragma region im bored
                                 listaResposta[0].id=0;
                                 listaResposta[0].strresposta[0]='d';
@@ -138,7 +138,10 @@ void menu(){
                         printf("\n\nA voltar\n\n");
                         break;
                     case 1:
-                        printf("\n1sub\n");
+                        lerString("\ninsere o nome do aluno\n", nome, 50);
+                        regime= lerInteiro("Insere o regime: ",0,1);
+                        lerString("\nInsere a turma do aluno\n", turno, 4);
+                        insAluno(sizeAluno, nome, regime,turno,listaAluno);
                         break;
                     case 2:
                         printf("\n2sub\n");
