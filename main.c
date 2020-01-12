@@ -9,18 +9,19 @@ pergunta *listaPergunta=NULL;
 int sizeTreino=0, sizeAluno=0, sizePergunta=0;
 int countTreino=1, countPergunta=1;
 void menu();
+void respostas(int sizePergunta, resposta *listaResposta);
 int main(int argc, char const *argv[]){
     criaFichBinarioAluno();
     criaFichBinarioTreino();
     criaFichBinarioPergunta();
-    //sizeTreino=loadTreino(listaTreino,&countTreino);
     listaAluno=loadAluno(listaAluno,&sizeAluno);
     listaPergunta=loadPergunta(listaPergunta,&sizePergunta,&countPergunta);
+    listaTreino=loadTreino(listaTreino,&sizeTreino,&countTreino);
     menu();
-    //guardaTreino(listaTreino,sizeTreino, countTreino);
+    guardaTreino(listaTreino,sizeTreino, countTreino);
     guardaAluno(listaAluno,sizeAluno);
     guardaPergunta(listaPergunta,sizePergunta, countPergunta);
-    //free(listaTreino);
+    free(listaTreino);
     free(listaPergunta);
     free(listaAluno);
     return 0;
@@ -65,6 +66,7 @@ void menu(){
             printf("\n\tA sair do programa.\n");
             break;
         #pragma endregion 
+    #pragma region perguntas
         case '1':
             do
             {
@@ -86,32 +88,13 @@ void menu(){
 
                     case '1':
                         lerString("Escreve o enunciado da pergunta: ",enunciado,MAX_CHARACTERES_PERGUNTA_PERGUNTA);
+                        respostas(sizePergunta,listaResposta);
                         respostacerta = lerInteiro("Escreve o qual das respostas esta certa", 1, NUMERO_RESPOSTAS_PERGUNTA);
                         int idRespostaCerta = sizePergunta * 10 + respostacerta-1;
                         materia = lerInteiro("Escreve a materia", 1, MAX_ID);    
                         exame = lerInteiro("Escreve o exame", 1, MAX_ID);    
-                        #pragma region im bored
-                                listaResposta[0].id=0;
-                                listaResposta[0].strresposta[0]='d';
-                                listaResposta[0].strresposta[1]='\0';
-                                listaResposta[1].id=0;
-                                listaResposta[1].strresposta[0]='d';
-                                listaResposta[1].strresposta[1]='\0';
-                                listaResposta[2].id=0;
-                                listaResposta[2].strresposta[0]='d';
-                                listaResposta[2].strresposta[1]='\0';
-                                listaResposta[3].id=0;
-                                listaResposta[3].strresposta[0]='d';
-                                listaResposta[3].strresposta[1]='\0';
-                        #pragma endregion 
-                        /*printf("\n%d",sizePergunta);
-                        printf("\n%d",countPergunta);
-                        printf("\n%s",enunciado);
-                        printf("\n%s", listaResposta[0].strresposta);
-                        printf("\n%s", listaResposta[1].strresposta);
-                        printf("\n%s", listaResposta[2].strresposta);
-                        printf("\n%s", listaResposta[3].strresposta);
-                        */
+                     
+                        
                         insPergunta(&sizePergunta,++countPergunta,(char *)enunciado,(resposta *)listaResposta,respostacerta, materia, exame, listaPergunta);
                         
                         //insPergunta(&sizePergunta,0,"0",listaResposta, 0,0,0,0,listaPergunta);
@@ -130,6 +113,7 @@ void menu(){
                 }
             }while(submenu != '0');
             break;
+        #pragma endregion
         case '2':
             do{
                 printf("\n0 - Voltar\n");
@@ -137,6 +121,7 @@ void menu(){
                 printf("2 - Alterar\n");
                 printf("3 - Consultar\n");
                 printf("4 - Listar\n");
+                printf("5 - Apagar\n");
                 printf("Opcao: ");
                 scanf("%c", &submenu);
                 limpaBufferStdin();
@@ -172,14 +157,16 @@ void menu(){
                             lerString("\nInsere o nome novo do aluno\n", nome, 50);
                             regime= lerInteiro("Insere o novo regime: ",0,1);
                             lerString("Insere a nova turma do aluno\n", turno, 4);
-                            insAluno(sizeAluno,IDal, nome, regime,turno,listaAluno,1);
-                            ++sizeAluno;
+                            insAluno(pos,IDal, nome, regime,turno,listaAluno,1);
+                            
                         }
                         break;
+
+                    
                     case '3':
+                        //TODO NAO SE SABE PORQUE A PORRA DO SEARCH A STRING RETORNA SEMPRE UM STRUCT VAZIO
                         //nome usado para nao haver tantas strings inicializadasd
                         lerString("Escreve um nome ou um id\n",nome,50);
-                        
                         if(nome[0]>=48&&nome[0]<=57){
                             
                             IDal=atoi(nome);
@@ -188,6 +175,7 @@ void menu(){
                                       
                         }else{
                             pos=procurAluno(nome,-1,sizeAluno,listaAluno);
+                            
                         }
                         if(pos==-1){
                             printf("Não existe nenhum aluno com tal id ou nome");
@@ -198,6 +186,24 @@ void menu(){
                         break;
                         case '4':
                             printaAlunos(sizeAluno, listaAluno);
+                        break;
+                        case '5':
+                            lerString("Escreve um nome ou um id\n",nome,50);
+                            
+                            if(nome[0]>=48&&nome[0]<=57){
+                                IDal=atoi(nome);
+                                pos=procurAluno("",IDal,sizeAluno,listaAluno);
+                                        
+                            }else{
+                                pos=procurAluno(nome,-1,sizeAluno,listaAluno);
+                            }
+                            if(pos==-1){
+                                printf("Não existe nenhum aluno com tal id ou nome");
+                            }else{
+                                printf("A apagar os registos de: %s",listaAluno[pos].nome);
+                                insAluno(pos,0, "\0", 0,"\0",listaAluno,1);
+                                --sizeAluno;
+                            }
                         break;
                     default:
                         printf("\nOpcao invalida\n\n");
@@ -282,4 +288,20 @@ void menu(){
 
     }
     while(opcao != '0');
+}
+void respostas(int sizePergunta, resposta *listaResposta)
+{
+    char resposta1[50],resposta2[50],resposta3[50],resposta4[50];
+    lerString("Introduza a primeira resposta: ", resposta1, MAX_CHARACTERES_RESPOSTA_RESPOSTA);
+    lerString("Introduza a segunda resposta: ", resposta2, MAX_CHARACTERES_RESPOSTA_RESPOSTA);
+    lerString("Introduza a terceira resposta: ", resposta3, MAX_CHARACTERES_RESPOSTA_RESPOSTA);
+    lerString("Introduza a quarta resposta: ", resposta4, MAX_CHARACTERES_RESPOSTA_RESPOSTA);
+    strcpy(listaResposta[0].strresposta, resposta1);
+    strcpy(listaResposta[1].strresposta, resposta2);
+    strcpy(listaResposta[2].strresposta, resposta3);
+    strcpy(listaResposta[3].strresposta, resposta4);
+    listaResposta[0].id=sizePergunta * 10 + 0;
+    listaResposta[1].id=sizePergunta * 10 + 1;
+    listaResposta[2].id=sizePergunta * 10 + 2;
+    listaResposta[3].id=sizePergunta * 10 + 3;
 }

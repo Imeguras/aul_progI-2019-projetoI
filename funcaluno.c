@@ -80,10 +80,12 @@ int procurAluno(char nome[MAX_CHARACTERES_NOME_ALUNO], int id, int size, aluno *
     unsigned char i,k;
     if(size!=0){
         if(id==-1){
-
-            for(t=0;t<=size;t++){
+            for(t=1;t<=size;t++){
                 for(i=0;i<MAX_CHARACTERES_NOME_ALUNO;i+=2){
+                    printf("\n%s\n", nome);
+                    printf("\n%s\n", listaAluno[t].nome);
                     if(strcmp(nome,listaAluno[t].nome)){
+                        printf("DAEWD%d", t);
                         return t;
                     }
                     
@@ -96,7 +98,7 @@ int procurAluno(char nome[MAX_CHARACTERES_NOME_ALUNO], int id, int size, aluno *
                 }
             }
         }else{
-            for(t=0;t<=size;t++){
+            for(t=1;t<=size;t++){
                 printf("%d", listaAluno[t].id);
                 if(listaAluno[t].id == id){
                     return t; 
