@@ -26,13 +26,15 @@ typedef struct{
     int exame;
 }pergunta;
 typedef struct{
-    int id; 
+    int estado;
+    int id;
+    int IDaluno; 
     int minutosDur;
     int prova;
-    int estado;
     int numperg;
-    int numdascertas;
     int numdaserradas;
+    pergunta per[10];
+    resposta respostasDadas[10];
     float nota; 
 }treino;
 

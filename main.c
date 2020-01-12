@@ -73,9 +73,10 @@ void menu(){
 
                printf("\n0 - Voltar\n");
                 printf("1 - Inserir\n");
-                printf("2 - Consultar\n");
-                printf("3 - Alterar\n");
+                printf("2 - Alterar\n");
+                printf("3 - Consultar\n");
                 printf("4 - Listar\n");
+                printf("5 - Eliminar\n");
                 printf("Opcao: ");
                 scanf("%c", &submenu);
                 limpaBufferStdin();
@@ -96,11 +97,10 @@ void menu(){
                      
                         
                         insPergunta(&sizePergunta,++countPergunta,(char *)enunciado,(resposta *)listaResposta,respostacerta, materia, exame, listaPergunta);
-                        
-                        //insPergunta(&sizePergunta,0,"0",listaResposta, 0,0,0,0,listaPergunta);
+
                         break;
                     case '2':
-                        printf("\n2sub\n");
+                        
                         break;
                     case '3':
                         printf("\n3sub\n");
