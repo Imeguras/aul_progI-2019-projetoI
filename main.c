@@ -149,11 +149,31 @@ void menu(){
                         lerString("\nInsere o nome do aluno\n", nome, 50);
                         regime= lerInteiro("Insere o regime: ",0,1);
                         lerString("Insere a turma do aluno\n", turno, 4);
-                        insAluno(sizeAluno,IDal, nome, regime,turno,listaAluno);
+                        insAluno(sizeAluno,IDal, nome, regime,turno,listaAluno,0);
                         ++sizeAluno;
                         break;
                     case '2':
-                        printf("\n2sub\n");
+                        lerString("Escreve um nome ou um id\n",nome,50);
+                        
+                        if(nome[0]>=48&&nome[0]<=57){
+                            
+                            IDal=atoi(nome);
+                            
+                            pos=procurAluno("",IDal,sizeAluno,listaAluno);
+                                      
+                        }else{
+                            pos=procurAluno(nome,-1,sizeAluno,listaAluno);
+                        }
+                        if(pos==-1){
+                            printf("Não existe nenhum aluno com tal id ou nome");
+                        }else{
+                            IDal=lerInteiro("\nInsere o ID novo do aluno", 1,MAX_ID);
+                            lerString("\nInsere o nome novo do aluno\n", nome, 50);
+                            regime= lerInteiro("Insere o novo regime: ",0,1);
+                            lerString("Insere a nova turma do aluno\n", turno, 4);
+                            insAluno(sizeAluno,IDal, nome, regime,turno,listaAluno,1);
+                            ++sizeAluno;
+                        }
                         break;
                     case '3':
                         //nome usado para nao haver tantas strings inicializadasd

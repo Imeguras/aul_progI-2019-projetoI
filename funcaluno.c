@@ -45,11 +45,11 @@ void printaPerguntas(int size, pergunta *listaPerguntas){
  @param nome, nome do aluno a inserir
  @param regime, regime do aluno a inserir
  @param turno, turno do aluno a inserir
- @param tipo, tipo do aluno a inserir
+ @param overwrite, "boolean" que quando esta a um salta a verificação da existencia de um membro na pos
  */
-void insAluno(int pos, int id,char nome[MAX_CHARACTERES_NOME_ALUNO], int regime, char turno[MAX_CHARACTERES_TURNO_ALUNO], aluno *listaAluno){
-     if(procurAluno(nome,-1,pos,listaAluno) ==-1){
-            if(listaAluno[pos].id != 0){
+void insAluno(int pos, int id,char nome[MAX_CHARACTERES_NOME_ALUNO], int regime, char turno[MAX_CHARACTERES_TURNO_ALUNO], aluno *listaAluno, int overwrite){
+     if((overwrite==1)||procurAluno(nome,-1,pos,listaAluno) ==-1){
+            if((overwrite==0)&&listaAluno[pos].id != 0){
                 printf("\nJa existe um aluno inscrito nesta posição\n");
             }else {
                 listaAluno[pos].id = id;
@@ -78,32 +78,32 @@ void insAluno(int pos, int id,char nome[MAX_CHARACTERES_NOME_ALUNO], int regime,
 int procurAluno(char nome[MAX_CHARACTERES_NOME_ALUNO], int id, int size, aluno *listaAluno){
     unsigned int t;
     unsigned char i,k;
-    
-    if(id==-1){
+    if(size!=0){
+        if(id==-1){
 
-        for(t=0;t<=size;t++){
-            for(i=0;i<MAX_CHARACTERES_NOME_ALUNO;i+=2){
-                if(strcmp(nome,listaAluno[t].nome)){
-                    return t;
-                }
-                
-                for(k=0; k<count; k++){
-                    if(nome[i]==listaAluno[k].nome[i]){
-                        k=count;
+            for(t=0;t<=size;t++){
+                for(i=0;i<MAX_CHARACTERES_NOME_ALUNO;i+=2){
+                    if(strcmp(nome,listaAluno[t].nome)){
+                        return t;
                     }
                     
+                    for(k=0; k<count; k++){
+                        if(nome[i]==listaAluno[k].nome[i]){
+                            k=count;
+                        }
+                        
+                    }
                 }
             }
-        }
-    }else{
-        for(t=0;t<=size;t++){
-            printf("%d", listaAluno[t].id);
-            if(listaAluno[t].id == id){
-                return t; 
+        }else{
+            for(t=0;t<=size;t++){
+                printf("%d", listaAluno[t].id);
+                if(listaAluno[t].id == id){
+                    return t; 
+                }
             }
         }
     }
-    
     return -1;
 }
 void printaAlunos(int size, aluno *listaAluno){
