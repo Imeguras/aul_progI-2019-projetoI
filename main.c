@@ -8,17 +8,16 @@ aluno *listaAluno=NULL;
 pergunta *listaPergunta=NULL;
 int sizeTreino=0, sizeAluno=0, sizePergunta=0;
 int countTreino=1, countPergunta=1;
+
 void menu();
 
 void respostas(int sizePergunta, resposta *listaResposta);
 int main(int argc, char const *argv[]){
-    criaFichBinarioAluno();
-    criaFichBinarioTreino();
-    criaFichBinarioPergunta();
     listaAluno=loadAluno(listaAluno,&sizeAluno);
     listaPergunta=loadPergunta(listaPergunta,&sizePergunta,&countPergunta);
     listaTreino=loadTreino(listaTreino,&sizeTreino,&countTreino);
     menu();
+    
     guardaTreino(listaTreino,sizeTreino, countTreino);
     guardaAluno(listaAluno,sizeAluno);
     guardaPergunta(listaPergunta,sizePergunta, countPergunta);
@@ -54,7 +53,7 @@ void menu(){
         printf("3 - Treinos\n");
         printf("4 - Rankings\n");
         printf("5 - Dados Estatisticos\n");
-        printf("6 - \n");
+        printf("6 - Resetar os ficheiros\n");
         printf("7 - \n");
 
         printf("Opcao: ");
@@ -113,6 +112,7 @@ void menu(){
             }while(submenu != '0');
             break;
         #pragma endregion
+        #pragma region aluno
         case '2':
             do{
                 printf("\n0 - Voltar\n");
@@ -167,14 +167,10 @@ void menu(){
                         //nome usado para nao haver tantas strings inicializadasd
                         lerString("Escreve um nome ou um id\n",nome,50);
                         if(nome[0]>=48&&nome[0]<=57){
-                            
                             IDal=atoi(nome);
-                            
-                            pos=procurAluno("",IDal,sizeAluno,listaAluno);
-                                      
+                            pos=procurAluno("",IDal,sizeAluno,listaAluno);        
                         }else{
                             pos=procurAluno(nome,-1,sizeAluno,listaAluno);
-                            
                         }
                         if(pos==-1){
                             printf("Não existe nenhum aluno com tal id ou nome");
@@ -209,6 +205,8 @@ void menu(){
                 }
             }while(submenu != '0');
             break;
+            #pragma endregion
+            #pragma region treino
         case '3':
             do{
                 printf("\n0 - Voltar\n");
@@ -232,30 +230,31 @@ void menu(){
                         sizeTreino++;
                         break;
                     case '2':
-                            lerString("Escreve um nome ou um id\n",nome,50);
+                            lerString("Escreve um nome ou um id de um aluno\n",nome,50);
                             int d=lerInteiro("Escreve o id do exame\n",1,sizeTreino);
+                            d=procurTreino(d,sizeTreino,listaTreino);
                             if(nome[0]>=48&&nome[0]<=57){
                                 IDal=atoi(nome);
-                                pos=procurAluno("",IDal,sizeAluno,listaAluno);
-                                        
+                                pos=procurAluno("",IDal,sizeAluno,listaAluno); 
                             }else{
                                 pos=procurAluno(nome,-1,sizeAluno,listaAluno);
                             }
-                            if(pos==-1){
-                                printf("Não existe nenhum aluno com tal id ou nome");
+                            if(pos==-1||d==-1){
+                                printf("Não existe nenhum aluno com tal id ou nome ou nao existe nenhum exame com esse id");
                             }else{
-                                //TODO
+                            
                                 fazTreino(listaAluno[pos],listaTreino[d]);
                             }
                         break;
                         case '3':
-                            printaTreino();
+                            printaTreino(sizeTreino, listaTreino);
                             break;
                     default:
                         printf("\nOpcao invalida\n\n");
                 }
             }while(submenu != '0');
             break;
+            #pragma endregion
         case '4':
             printf("\n4\n\n");
             break;
@@ -278,13 +277,23 @@ void menu(){
                     printf("\n\nA voltar\n\n");
                     break;
                 case '1':
-                    printf("\n1sub\n");
+                    lerString("Escreve um id\n",nome,50);
+                    procurPergunta(enunciado, IDal,-1,nome[0],-1,sizePergunta,listaPergunta);
+                    if(pos==-1){
+                        printf("Não existe nenhuma pergunta com tal id");
+                    }else{
+                        IDal= enunciado[0];
+                        printf("Tempo media da resposta e:%d", listaPergunta[IDal].tempoMedio);
+                    }
                     break;
                 case '2':
-                    printf("\n2sub\n");
+                   
+                    
                     break;
                 case '3':
-                    printf("\n3sub\n");
+                    /*for (size_t i = 0; i < sizeTreino; i++){
+                        printf("%",);
+                    }*/
                     break;
                 case '4':
                     printf("\n4sub\n");
@@ -299,7 +308,12 @@ void menu(){
             while(submenu != '0');
             break;
         case '6':
-            printf("\n6\n\n");
+            criaFichBinarioAluno();
+            criaFichBinarioTreino();
+            criaFichBinarioPergunta();
+            listaAluno=loadAluno(listaAluno,&sizeAluno);
+            listaPergunta=loadPergunta(listaPergunta,&sizePergunta,&countPergunta);
+            listaTreino=loadTreino(listaTreino,&sizeTreino,&countTreino);
             break;
         case '7':
             printf("\n7\n\n");

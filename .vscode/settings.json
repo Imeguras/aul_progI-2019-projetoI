@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "ficheirosio.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "thread": "c"
     }
 }

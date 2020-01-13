@@ -8,7 +8,7 @@
 #include "estruturas.h"
 treino *criaTreino(int id, int IDaluno, int sizePergunta,int prova, int numperg, treino *listaTreino, pergunta *listaPergunta);
 void fazTreino(aluno al, treino realizado);
-
+void printaTreino(int size, treino *listaTreino);
 void insPergunta(int *tamanhoLista,int id, char enunciado[MAX_CHARACTERES_PERGUNTA_PERGUNTA], resposta respostas[NUMERO_RESPOSTAS_PERGUNTA], int IDrespostacerta,int materia,int exame, pergunta *listaPergunta);
 void printaPerguntas(int size, pergunta *listaPerguntas);
 void procurPergunta(char *lista,int *t,int exame, int id, int materia,int size, pergunta *listaPergunta);

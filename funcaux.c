@@ -1,6 +1,6 @@
 #include "funcaux.h"
-time_t current;
 
+int flagRandom=0;
 int lerInteiro(char mensagem[FUNCAUX_MAX_STRING], int minimo, int maximo)
 {
     int numero, controlo;
@@ -101,8 +101,13 @@ void limpaBufferStdin(void)
 @Param offset-Numero a adicionar apos o calculo do numero aleatorio
 @Param alcance-Numero ao qual o valor maximo possivel sera igual
 */
+void generateRandom(){
+    struct tm tampo;
+    srand((unsigned) time(&tampo));
+}
 int numeroAle(int offset, int alcance){
-    time_t t;
-    srand(time(&t));
-    return offset+(int)((int)rand() % alcance);
+    if(flagRandom =0){
+        generateRandom();
+    }
+    return offset+(rand() % alcance);
 }

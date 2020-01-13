@@ -48,9 +48,10 @@ void criaFichBinarioTreino(){
         //fclose(ficheiro);
     }else{
         treino tvazio ={0};
-        debug += fwrite(&tvazio.id, sizeof(int), 1, ficheiro);
-        debug += fwrite(&tvazio.id, sizeof(int), 1, ficheiro);
-        debug += fwrite(&tvazio ,sizeof(treino), 1, ficheiro); 
+        
+        debug+=fwrite(&debug, sizeof(int), 1, ficheiro);
+        debug+=fwrite(&debug, sizeof(int), 1, ficheiro);
+        fwrite(&tvazio ,sizeof(treino), 1, ficheiro); 
         printf("\nEscritas: %d linhas", debug);
         fclose(ficheiro);
     }
@@ -114,9 +115,9 @@ void criaFichBinarioPergunta(){
         fclose(ficheiro);
     }else{
         pergunta vazia ={0};
-        debug += fwrite(&debug, sizeof(int), 1, ficheiro);//debug -0
-        debug += fwrite(&debug, sizeof(int), 1, ficheiro);//debug -1
-        debug += fwrite(&vazia ,sizeof(pergunta), 1, ficheiro);
+        fwrite(&debug, sizeof(int), 1, ficheiro);//debug -0
+        fwrite(&debug, sizeof(int), 1, ficheiro);//debug -1
+        fwrite(&vazia ,sizeof(pergunta), 1, ficheiro);
         printf("\nEscritas: %d linhas", debug);
         fclose(ficheiro);
     }
@@ -168,10 +169,10 @@ void criaFichBinarioAluno(){
         fclose(ficheiro);
     }else{
         aluno avazio ={0};
-        debug += fwrite(&debug, sizeof(int), 1, ficheiro);
-        debug += fwrite(&avazio.id, sizeof(int), 1, ficheiro);
-        debug += fwrite(&avazio ,sizeof(aluno), 1, ficheiro);
-        printf("\nEscritas: %d linhas", debug);
+         fwrite(&debug, sizeof(int), 1, ficheiro);
+        fwrite(&avazio.id, sizeof(int), 1, ficheiro);
+        fwrite(&avazio ,sizeof(aluno), 1, ficheiro);
+        
         fclose(ficheiro);
     }   
 }
