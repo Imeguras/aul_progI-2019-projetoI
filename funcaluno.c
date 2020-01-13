@@ -18,20 +18,26 @@ unsigned char count=0;
 //Estado 256 indica por fazer
 
 treino *criaTreino(int id, int IDaluno, int sizePergunta,int prova, int numperg, treino *listaTreino, pergunta *listaPergunta){
-    int k;
-    if(sizePergunta ==0){
+    int k=0;
+    if(sizePergunta<4){
         printf("nao existem perguntas suficientes para fazer um exame");
     }else{
-        ++id;
-        listaTreino=realloc(listaTreino,(id)*sizeof(treino));
-        listaTreino[id].id=id;
-        listaTreino[id].estado=256;
-        listaTreino[id].IDaluno= IDaluno;
-        listaTreino[id].numperg=numperg;
-        listaTreino[id].prova=prova;
+        
+        listaTreino=realloc(listaTreino,(id+1)*sizeof(treino));
+        listaTreino[id-1].id=id;
+        listaTreino[id-1].estado=256;
+        listaTreino[id-1].IDaluno= IDaluno;
+        listaTreino[id-1].numperg=numperg;
+        listaTreino[id-1].prova=prova;
+        char ids[MAX_PERGUNTAS];
+        procurPergunta(ids,&k,prova,-1,-1,sizePergunta,listaPergunta);
+        
         for (size_t i = 0; i < numperg; i++)
         {
-            listaTreino[id].per[i]=listaPergunta[procurPergunta(&k,prova,-1,-1,sizePergunta,listaPergunta)[numeroAle(0,k)]];//=procur(numeroAle(1,sizePergunta));
+            
+            //printf("%d ",k);
+            int aleatoria=numeroAle(0,k);
+            listaTreino[id].per[i]=listaPergunta[aleatoria];//=procur(numeroAle(1,sizePergunta));
         }
         
     }
@@ -41,9 +47,10 @@ treino *criaTreino(int id, int IDaluno, int sizePergunta,int prova, int numperg,
 void fazTreino(aluno al, treino realizado){
     realizado.estado=0;
     realizado.IDaluno= al.id;
-    
+    realizado.minutosDur= lerInteiro("Demoraste quantos minutos a fazer o treino?\n",0,MAX_TEMPO);
     for(int i=0; i<realizado.numperg; i++){
         printf("%s",realizado.per[i].strpergunta);
+        realizado.per[i].tempoMedio=(int)realizado.numperg/realizado.minutosDur;
         for (int j = 0; j < NUMERO_RESPOSTAS_PERGUNTA; j++)
         {
             printf("%s", realizado.per[i].mulrespostas[j].strresposta);
@@ -55,14 +62,13 @@ void fazTreino(aluno al, treino realizado){
         }
         al.respostasTotais+=1;
     }
-    
     al.treinosComp+=1;
-    lerInteiro("Demoraste quantos minutos a fazer o treino?\n",0,MAX_TEMPO);
+    
 }
 #pragma endregion
 #pragma region Perguntas
 void insPergunta(int *tamanhoLista,int id, char enunciado[MAX_CHARACTERES_PERGUNTA_PERGUNTA], resposta respostas[NUMERO_RESPOSTAS_PERGUNTA], int IDrespostacerta,int materia,int exame, pergunta *listaPergunta){
-        printf("works");
+        
         if(*tamanhoLista==MAX_PERGUNTAS){
             printf("Lista cheia");
         }else{
@@ -75,13 +81,13 @@ void insPergunta(int *tamanhoLista,int id, char enunciado[MAX_CHARACTERES_PERGUN
                listaPergunta[*tamanhoLista].mulrespostas[i]=respostas[i];
             }
             listaPergunta[*tamanhoLista].materia= materia;
-            
+            listaPergunta[*tamanhoLista].respostacerta = IDrespostacerta;
             listaPergunta[*tamanhoLista].exame= exame;
             *tamanhoLista+=1;
         }
 }
 void printaPerguntas(int size, pergunta *listaPerguntas){
-    for(int i=1;i<=size;i++){
+    for(int i=0;i<size;i++){
         
         printf("\nID: %d", listaPerguntas[i].id);
         printf("\n\tEnunciado: %s", listaPerguntas[i].strpergunta);
@@ -98,26 +104,26 @@ void printaPerguntas(int size, pergunta *listaPerguntas){
 }
 
 
-char *procurPergunta(int *t,int exame, int id, int materia,int size, pergunta *listaPergunta){
+void procurPergunta(char *lista,int *t,int exame, int id, int materia,int size, pergunta *listaPergunta){
     unsigned int i=0;    
-    char lista[MAX_PERGUNTAS];
+    
     if(size!=0){
         if(id==-1 && materia==-1){
-            for (*t = 0; *t < size; *t++){
+            for (*t = 0; *t < size; (*t)++){
                 if(listaPergunta[*t].exame == exame){  
-                    lista[i++]=t;
+                    lista[i++]=*t;
                 }
             }
-         return t;   
+          
             
         }else if(exame==-1 && materia==-1 ){
-            for (*t = 0; *t < size; *t++){
+            for (*t = 0; *t < size; (*t)++){
                 if(listaPergunta[*t].id == id){
                     lista[i++]=*t;
                 }
             }
         }else if(exame==-1 && id==-1 ){
-            for (*t = 0; *t < size; *t++){
+            for (*t = 0; *t < size; (*t)++){
                 if(listaPergunta[*t].materia == materia){
                     lista[i++]=*t;
                 }
@@ -125,7 +131,8 @@ char *procurPergunta(int *t,int exame, int id, int materia,int size, pergunta *l
         }
 
     }
-    return -1;
+    
+    
 }
 #pragma endregion 
 #pragma region Aluno
@@ -145,6 +152,7 @@ void insAluno(int pos, int id,char nome[MAX_CHARACTERES_NOME_ALUNO], int regime,
                 strcpy(listaAluno[pos].nome, nome);
                 listaAluno[pos].regime = regime;
                 strcpy(listaAluno[pos].turno, turno);
+                
                 listaAluno[pos].respostasCertas=0;
                 listaAluno[pos].respostasTotais=0;
                 listaAluno[pos].treinosComp=0; 

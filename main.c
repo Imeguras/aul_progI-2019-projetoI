@@ -11,9 +11,9 @@ int countTreino=1, countPergunta=1;
 void menu();
 void respostas(int sizePergunta, resposta *listaResposta);
 int main(int argc, char const *argv[]){
-    //criaFichBinarioAluno();
-    //criaFichBinarioTreino();
-    //criaFichBinarioPergunta();
+    criaFichBinarioAluno();
+    criaFichBinarioTreino();
+    criaFichBinarioPergunta();
     listaAluno=loadAluno(listaAluno,&sizeAluno);
     listaPergunta=loadPergunta(listaPergunta,&sizePergunta,&countPergunta);
     listaTreino=loadTreino(listaTreino,&sizeTreino,&countTreino);
@@ -224,9 +224,11 @@ void menu(){
                         break;
                     case '1':
                         IDal=lerInteiro("Qual e o aluno a realizar a prova?\n", 1,MAX_ID);
-                        exame=lerInteiro("Qual e o exame a treinar?\n", 1,MAX_ID);
+                        exame=lerInteiro("Qual e o exame a treinar?\n", 1,4);
                         regime =lerInteiro("Quantas perguntas e que queres no treino?\n", MIN_PERGUNTAS_TREINO,MAX_PERGUNTAS_TREINO);
                         listaTreino=criaTreino(countTreino,IDal,sizePergunta,exame,regime,listaTreino,listaPergunta);
+                        countTreino++;
+                        sizeTreino++;
                         break;
                     case '2':
                         printf("\n2sub\n");
@@ -292,8 +294,7 @@ void menu(){
     while(opcao != '0');
 }
 //@param SizePergunta-Determina o id pelo contador
-void respostas(int sizePergunta, resposta *listaResposta)
-{
+void respostas(int sizePergunta, resposta *listaResposta){
     char resposta1[50],resposta2[50],resposta3[50],resposta4[50];
     lerString("Introduza a primeira resposta: ", resposta1, MAX_CHARACTERES_RESPOSTA_RESPOSTA);
     lerString("Introduza a segunda resposta: ", resposta2, MAX_CHARACTERES_RESPOSTA_RESPOSTA);

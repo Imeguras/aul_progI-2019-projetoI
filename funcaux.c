@@ -103,6 +103,6 @@ void limpaBufferStdin(void)
 */
 int numeroAle(int offset, int alcance){
     time_t t;
-    srand((unsigned) time(&t));
-    return alcance+rand() % offset;
+    srand(time(&t));
+    return offset+(int)((int)rand() % alcance);
 }

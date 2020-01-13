@@ -24,6 +24,7 @@ typedef struct{
     int respostacerta;
     int materia;  
     int exame;
+    int tempoMedio;
 }pergunta;
 typedef struct{
     int estado;
@@ -34,6 +35,7 @@ typedef struct{
     int numperg;
     int numdaserradas;
     pergunta per[10];
+    struct tm data;
     int respostasDadas[10];
     float nota; 
 }treino;

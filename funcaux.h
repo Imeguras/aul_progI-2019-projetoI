@@ -2,6 +2,7 @@
 #define FUNCAUX_H_INCLUDED
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "constantes.h"
 #include "time.h"
 int lerInteiro(char mensagem[FUNCAUX_MAX_STRING], int minimo, int maximo);
