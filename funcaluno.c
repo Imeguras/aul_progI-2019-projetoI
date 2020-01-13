@@ -65,6 +65,30 @@ void fazTreino(aluno al, treino realizado){
     al.treinosComp+=1;
     
 }
+void printaTreino(int size, treino *listaTreino){
+    for(int i=0;i<size;i++){
+        printf("\nID: %d", listaTreino[i].id);
+        if(listaTreino[i].estado==0){
+            printf("Estado: Realizado");
+            printf("\nDemorou: %d a ser realizado", listaTreino[i].minutosDur);
+            printf("\nNota: %d",listaTreino[i].nota);
+            printf("\n\tMateria: %d",listaTreino[i].numdaserradas);
+        }else
+        {
+            printf("Estado: Por fazer");
+        }
+        printf("\nCriado pelo aluno de ID: %d", listaTreino[i].IDaluno);
+        printf("\nExame: %d",listaTreino[i].prova);
+        for (size_t t = 0; t < MAX_PERGUNTAS_TREINO; t++)
+            printf("\n\tExame: %d",listaTreino[i].per[t]);
+        }
+        
+        
+        
+       
+        
+    }
+
 #pragma endregion
 #pragma region Perguntas
 void insPergunta(int *tamanhoLista,int id, char enunciado[MAX_CHARACTERES_PERGUNTA_PERGUNTA], resposta respostas[NUMERO_RESPOSTAS_PERGUNTA], int IDrespostacerta,int materia,int exame, pergunta *listaPergunta){

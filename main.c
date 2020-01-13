@@ -9,6 +9,7 @@ pergunta *listaPergunta=NULL;
 int sizeTreino=0, sizeAluno=0, sizePergunta=0;
 int countTreino=1, countPergunta=1;
 void menu();
+
 void respostas(int sizePergunta, resposta *listaResposta);
 int main(int argc, char const *argv[]){
     criaFichBinarioAluno();
@@ -212,7 +213,7 @@ void menu(){
             do{
                 printf("\n0 - Voltar\n");
                 printf("1 - Criar\n");
-                printf("2 - Consultar\n");
+                printf("2 - Treinar\n");
                 printf("3 - Listar\n");
                 printf("Opcao: ");
                 scanf("%c", &submenu);
@@ -231,8 +232,25 @@ void menu(){
                         sizeTreino++;
                         break;
                     case '2':
-                        printf("\n2sub\n");
+                            lerString("Escreve um nome ou um id\n",nome,50);
+                            int d=lerInteiro("Escreve o id do exame\n",1,sizeTreino);
+                            if(nome[0]>=48&&nome[0]<=57){
+                                IDal=atoi(nome);
+                                pos=procurAluno("",IDal,sizeAluno,listaAluno);
+                                        
+                            }else{
+                                pos=procurAluno(nome,-1,sizeAluno,listaAluno);
+                            }
+                            if(pos==-1){
+                                printf("Não existe nenhum aluno com tal id ou nome");
+                            }else{
+                                //TODO
+                                fazTreino(listaAluno[pos],listaTreino[d]);
+                            }
                         break;
+                        case '3':
+                            printaTreino();
+                            break;
                     default:
                         printf("\nOpcao invalida\n\n");
                 }
@@ -308,4 +326,15 @@ void respostas(int sizePergunta, resposta *listaResposta){
     listaResposta[1].id=sizePergunta * 10 + 1;
     listaResposta[2].id=sizePergunta * 10 + 2;
     listaResposta[3].id=sizePergunta * 10 + 3;
+}
+void ranking(aluno *vetor, int sizeAluno)
+{
+    int variavel, maior;
+    for(int i = 0; i < sizeAluno; i++){
+        maior = vetor[0].respostasCertas;
+        if(maior < vetor[i].respostasCertas){
+            maior <= vetor[i].respostasCertas;
+            printf("%d\n", vetor[i].id);
+        }
+    }
 }
