@@ -1,6 +1,7 @@
 #include "funcaluno.h"
 
 unsigned char count=0;
+
 #pragma region treinos
 /*typedef struct{
     int id;
@@ -15,16 +16,26 @@ unsigned char count=0;
     float nota; 
 }treino;*/
 //Estado 256 indica por fazer
-treino *criaTreino(int id, int IDaluno, int prova, int numperg, treino *listaTreino){
-    ++id;
-    listaTreino=realloc(listaTreino,(id)*sizeof(treino));
-    listaTreino[id].id=id;
-    listaTreino[id].estado=256;
-    listaTreino[id].IDaluno= IDaluno;
-    listaTreino[id].numperg=numperg;
-    listaTreino[id].prova=prova;
-    
+
+treino *criaTreino(int id, int IDaluno, int sizePergunta,int prova, int numperg, treino *listaTreino, pergunta *listaPergunta){
+    if(sizePergunta ==0){
+        printf("nao existem perguntas suficientes para fazer um exame");
+    }else{
+        ++id;
+        listaTreino=realloc(listaTreino,(id)*sizeof(treino));
+        listaTreino[id].id=id;
+        listaTreino[id].estado=256;
+        listaTreino[id].IDaluno= IDaluno;
+        listaTreino[id].numperg=numperg;
+        listaTreino[id].prova=prova;
+        for (size_t i = 0; i < 10; i++)
+        {
+            listaTreino[id].per[i]=listaPergunta[procurPergunta(prova,-1,-1,sizePergunta,listaPergunta)];//=procur(numeroAle(1,sizePergunta));
+        }
+        
+    }
     return listaTreino;
+    
 }    
 
 #pragma endregion
@@ -35,7 +46,7 @@ void insPergunta(int *tamanhoLista,int id, char enunciado[MAX_CHARACTERES_PERGUN
             printf("Lista cheia");
         }else{
             int i,t;
-            *tamanhoLista+=1;
+            
             t=*tamanhoLista;     
             listaPergunta[t].id = id;
             strcpy(listaPergunta[*tamanhoLista].strpergunta, enunciado);
@@ -45,6 +56,7 @@ void insPergunta(int *tamanhoLista,int id, char enunciado[MAX_CHARACTERES_PERGUN
             listaPergunta[*tamanhoLista].materia= materia;
             
             listaPergunta[*tamanhoLista].exame= exame;
+            *tamanhoLista+=1;
         }
 }
 void printaPerguntas(int size, pergunta *listaPerguntas){
@@ -62,6 +74,37 @@ void printaPerguntas(int size, pergunta *listaPerguntas){
         printf("\n\tExame: %d",listaPerguntas[i].exame);
         
     }
+}
+
+
+int procurPergunta(int exame, int id, int materia,int size, pergunta *listaPergunta){
+    unsigned int t;    
+    
+    if(size!=0){
+        if(id==-1 && materia==-1){
+            for (t = 0; t < size; t++){
+                if(listaPergunta[t].exame == exame){
+                    return t;
+                }
+            }
+            
+            
+        }else if(exame==-1 && materia==-1 ){
+            for (t = 0; t < size; t++){
+                if(listaPergunta[t].id == id){
+                    return t;
+                }
+            }
+        }else if(exame==-1 && id==-1 ){
+            for (t = 0; t < size; t++){
+                if(listaPergunta[t].materia == materia){
+                    return t;
+                }
+            }
+        }
+
+    }
+    return -1;
 }
 #pragma endregion 
 #pragma region Aluno
@@ -105,25 +148,13 @@ int procurAluno(char nome[MAX_CHARACTERES_NOME_ALUNO], int id, int size, aluno *
     unsigned char i,k;
     if(size!=0){
         if(id==-1){
-            for(t=1;t<=size;t++){
-                for(i=0;i<MAX_CHARACTERES_NOME_ALUNO;i+=2){
-                    printf("\n%s\n", nome);
-                    printf("\n%s\n", listaAluno[t].nome);
-                    if(strcmp(nome,listaAluno[t].nome)){
-                        printf("DAEWD%d", t);
+            for(t=0;t<=size;t++){
+                if(strcmp(nome,listaAluno[t].nome)==0){
                         return t;
-                    }
-                    
-                    for(k=0; k<count; k++){
-                        if(nome[i]==listaAluno[k].nome[i]){
-                            k=count;
-                        }
-                        
-                    }
                 }
             }
         }else{
-            for(t=1;t<=size;t++){
+            for(t=0;t<=size;t++){
                 printf("%d", listaAluno[t].id);
                 if(listaAluno[t].id == id){
                     return t; 

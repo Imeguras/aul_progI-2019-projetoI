@@ -13,7 +13,7 @@ void respostas(int sizePergunta, resposta *listaResposta);
 int main(int argc, char const *argv[]){
     criaFichBinarioAluno();
     criaFichBinarioTreino();
-    criaFichBinarioPergunta();
+    //criaFichBinarioPergunta();
     listaAluno=loadAluno(listaAluno,&sizeAluno);
     listaPergunta=loadPergunta(listaPergunta,&sizePergunta,&countPergunta);
     listaTreino=loadTreino(listaTreino,&sizeTreino,&countTreino);
@@ -89,15 +89,13 @@ void menu(){
 
                     case '1':
                         lerString("Escreve o enunciado da pergunta: ",enunciado,MAX_CHARACTERES_PERGUNTA_PERGUNTA);
-                        respostas(sizePergunta,listaResposta);
+                        respostas(countPergunta,listaResposta);
                         respostacerta = lerInteiro("Escreve o qual das respostas esta certa", 1, NUMERO_RESPOSTAS_PERGUNTA);
                         int idRespostaCerta = sizePergunta * 10 + respostacerta-1;
                         materia = lerInteiro("Escreve a materia", 1, MAX_ID);    
-                        exame = lerInteiro("Escreve o exame", 1, MAX_ID);    
-                     
-                        
-                        insPergunta(&sizePergunta,++countPergunta,(char *)enunciado,(resposta *)listaResposta,respostacerta, materia, exame, listaPergunta);
-
+                        exame = lerInteiro("Escreve o exame", 1, NUMERO_PROVAS);   
+                        insPergunta(&sizePergunta,countPergunta,(char *)enunciado,(resposta *)listaResposta,respostacerta, materia, exame, listaPergunta);
+                        ++countPergunta;
                         break;
                     case '2':
                         
@@ -164,7 +162,7 @@ void menu(){
 
                     
                     case '3':
-                        //TODO NAO SE SABE PORQUE A PORRA DO SEARCH A STRING RETORNA SEMPRE UM STRUCT VAZIO
+                        
                         //nome usado para nao haver tantas strings inicializadasd
                         lerString("Escreve um nome ou um id\n",nome,50);
                         if(nome[0]>=48&&nome[0]<=57){
@@ -289,6 +287,7 @@ void menu(){
     }
     while(opcao != '0');
 }
+//@param SizePergunta-Determina o id pelo contador
 void respostas(int sizePergunta, resposta *listaResposta)
 {
     char resposta1[50],resposta2[50],resposta3[50],resposta4[50];

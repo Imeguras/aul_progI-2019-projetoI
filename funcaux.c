@@ -97,3 +97,12 @@ void limpaBufferStdin(void)
     }
     while (chr != '\n' && chr != EOF);
 }
+/*
+@Param offset-Numero a adicionar apos o calculo do numero aleatorio
+@Param alcance-Numero ao qual o valor maximo possivel sera igual
+*/
+int numeroAle(int offset, int alcance){
+    time_t t;
+    srand((unsigned) time(&t));
+    return alcance+rand() % offset;
+}

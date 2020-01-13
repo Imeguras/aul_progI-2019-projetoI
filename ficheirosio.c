@@ -58,7 +58,8 @@ void criaFichBinarioTreino(){
 }
 #pragma endregion 
 #pragma region Pergunta
-void guardaPergunta(pergunta *trePer, int size, int count){
+
+void guardaPergunta(pergunta *trePer,int size, int count){
     ficheiro=fopen("pergunta.dat", "r+b");
     
     if(ficheiro==NULL){
@@ -66,12 +67,20 @@ void guardaPergunta(pergunta *trePer, int size, int count){
         fclose(ficheiro);
         criaFichBinarioPergunta();
         guardaPergunta(trePer,size, count);
+        
     }else{
             fseek(ficheiro,0,SEEK_SET);
             fwrite(&size, sizeof(int), 1, ficheiro);
             fwrite(&count, sizeof(int), 1, ficheiro);
-            fwrite(trePer,sizeof(pergunta), size, ficheiro); 
-                
+            fwrite(trePer,sizeof(pergunta),size,ficheiro);
+            /*for(int i=0; i<=size;i++){
+                fwrite(&trePer[i].id,sizeof(int), 1, ficheiro); 
+                fwrite(&trePer[i].strpergunta,sizeof(char), MAX_CHARACTERES_PERGUNTA_PERGUNTA, ficheiro); 
+                fwrite(&trePer[i].mulrespostas,sizeof(resposta), NUMERO_RESPOSTAS_PERGUNTA,ficheiro);
+                fwrite(&trePer[i].respostacerta, sizeof(int), 1, ficheiro);
+                fwrite(&trePer[i].materia, sizeof(int), 1, ficheiro);
+                fwrite(&trePer[i].exame, sizeof(int), 1, ficheiro);
+            }*/    
             fclose(ficheiro);
     }
     
