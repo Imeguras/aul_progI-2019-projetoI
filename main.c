@@ -11,8 +11,8 @@ int countTreino=1, countPergunta=1;
 void menu();
 void respostas(int sizePergunta, resposta *listaResposta);
 int main(int argc, char const *argv[]){
-    criaFichBinarioAluno();
-    criaFichBinarioTreino();
+    //criaFichBinarioAluno();
+    //criaFichBinarioTreino();
     //criaFichBinarioPergunta();
     listaAluno=loadAluno(listaAluno,&sizeAluno);
     listaPergunta=loadPergunta(listaPergunta,&sizePergunta,&countPergunta);
@@ -211,8 +211,9 @@ void menu(){
         case '3':
             do{
                 printf("\n0 - Voltar\n");
-                printf("1 - Consultar\n");
-                printf("2 - Listar\n");
+                printf("1 - Criar\n");
+                printf("2 - Consultar\n");
+                printf("3 - Listar\n");
                 printf("Opcao: ");
                 scanf("%c", &submenu);
                 limpaBufferStdin();
@@ -222,7 +223,10 @@ void menu(){
                         printf("\n\nA voltar\n\n");
                         break;
                     case '1':
-                        printf("\n1sub\n");
+                        IDal=lerInteiro("Qual e o aluno a realizar a prova?\n", 1,MAX_ID);
+                        exame=lerInteiro("Qual e o exame a treinar?\n", 1,MAX_ID);
+                        regime =lerInteiro("Quantas perguntas e que queres no treino?\n", MIN_PERGUNTAS_TREINO,MAX_PERGUNTAS_TREINO);
+                        listaTreino=criaTreino(countTreino,IDal,sizePergunta,exame,regime,listaTreino,listaPergunta);
                         break;
                     case '2':
                         printf("\n2sub\n");

@@ -34,7 +34,7 @@ typedef struct{
     int numperg;
     int numdaserradas;
     pergunta per[10];
-    resposta respostasDadas[10];
+    int respostasDadas[10];
     float nota; 
 }treino;
 
