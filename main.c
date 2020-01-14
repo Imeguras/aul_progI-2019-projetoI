@@ -55,7 +55,7 @@ void menu(){
         printf("4 - Rankings\n");
         printf("5 - Dados Estatisticos\n");
         printf("6 - Resetar os ficheiros\n");
-        printf("7 - \n");
+        
 
         printf("Opcao: ");
         scanf("%c", &opcao);
@@ -235,6 +235,7 @@ void menu(){
                             lerString("Escreve um nome ou um id de um aluno\n",nome,50);
                             d=lerInteiro("Escreve o id do treino\n",1,sizeTreino);
                             d=procurTreino(d,sizeTreino,listaTreino);
+                            //verifica se e um numero ou um nome
                             if(nome[0]>=48&&nome[0]<=57){
                                 IDal=atoi(nome);
                                 pos=procurAluno("",IDal,sizeAluno,listaAluno); 
@@ -324,6 +325,7 @@ void menu(){
             while(submenu != '0');
             break;
         case '6':
+            //apaga e carrega tudo de novo (hard reset)
             criaFichBinarioAluno();
             criaFichBinarioTreino();
             criaFichBinarioPergunta();
@@ -331,9 +333,7 @@ void menu(){
             listaPergunta=loadPergunta(listaPergunta,&sizePergunta,&countPergunta);
             listaTreino=loadTreino(listaTreino,&sizeTreino,&countTreino);
             break;
-        case '7':
-            printf("\n7\n\n");
-            break;
+        
         default:
             printf("\nOpcao invalida\n\n");
         }
