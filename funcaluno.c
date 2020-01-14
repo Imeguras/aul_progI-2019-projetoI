@@ -226,7 +226,7 @@ int procurAluno(char nome[MAX_CHARACTERES_NOME_ALUNO], int id, int size, aluno *
     return -1;
 }
 void printaAlunos(int size, aluno *listaAluno){
-    if(size!=1){
+    //if(size!=1){
         for(int i=0;i<size;i++){
             printf("\nID: %d", listaAluno[i].id);
             printf("\n\tNome: %s", listaAluno[i].nome);
@@ -235,15 +235,8 @@ void printaAlunos(int size, aluno *listaAluno){
             printf("\n\tQuantidade de resposta Certas: %d",listaAluno[i].respostasCertas);
             printf("\n\tQuantidade de resposta Totais: %d",listaAluno[i].respostasTotais);
             printf("\n\tTreinos completos: %d",listaAluno[i].treinosComp);
+            printf("\n\tUltima nota: %0.2f",listaAluno[i].ultimaNota);
         }
-    }else{
-        printf("\nID: %d", listaAluno[0].id);
-        printf("\n\tNome: %s", listaAluno[0].nome);
-        printf("\n\tRegime: %d",listaAluno[0].regime);
-        printf("\n\tTurno: %s",listaAluno[0].turno);
-        printf("\n\tQuantidade de resposta Certas: %d",listaAluno[0].respostasCertas);
-        printf("\n\tQuantidade de resposta Totais: %d",listaAluno[0].respostasTotais);
-        printf("\n\tTreinos completos: %d",listaAluno[0].treinosComp);
-    }
+    
 }
 #pragma endregion
