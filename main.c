@@ -10,7 +10,7 @@ int sizeTreino=0, sizeAluno=0, sizePergunta=0;
 int countTreino=1, countPergunta=1;
 
 void menu();
-
+int ranking(aluno *vetor, int sizeAluno);
 void respostas(int sizePergunta, resposta *listaResposta);
 int main(int argc, char const *argv[]){
     listaAluno=loadAluno(listaAluno,&sizeAluno);
@@ -39,6 +39,7 @@ void menu(){
     char nome[MAX_CHARACTERES_NOME_ALUNO];
     int regime;
     char turno[4];
+    int d;
     #pragma region NORMAL 
     do
     {
@@ -213,6 +214,7 @@ void menu(){
                 printf("1 - Criar\n");
                 printf("2 - Treinar\n");
                 printf("3 - Listar\n");
+                printf("4 - Consultar as perguntas e respostas dadas\n");
                 printf("Opcao: ");
                 scanf("%c", &submenu);
                 limpaBufferStdin();
@@ -231,7 +233,7 @@ void menu(){
                         break;
                     case '2':
                             lerString("Escreve um nome ou um id de um aluno\n",nome,50);
-                            int d=lerInteiro("Escreve o id do exame\n",1,sizeTreino);
+                            d=lerInteiro("Escreve o id do treino\n",1,sizeTreino);
                             d=procurTreino(d,sizeTreino,listaTreino);
                             if(nome[0]>=48&&nome[0]<=57){
                                 IDal=atoi(nome);
@@ -243,11 +245,24 @@ void menu(){
                                 printf("Não existe nenhum aluno com tal id ou nome ou nao existe nenhum exame com esse id");
                             }else{
                             
-                                fazTreino(listaAluno[pos],listaTreino[d]);
+                                fazTreino(&listaAluno[pos],&listaTreino[d]);
+                               
+                                
                             }
                         break;
                         case '3':
                             printaTreino(sizeTreino, listaTreino);
+                            break;
+                        case '4':
+                             d=lerInteiro("Escreve o treino\n",1,sizeTreino);
+                            procurTreino(d,sizeTreino,listaTreino);
+                            printaPerguntas(sizePergunta, listaTreino[d].per);
+                            for (size_t i = 0; i < MAX_PERGUNTAS_TREINO; i++)
+                            {
+                                
+                                printf("ID da reposta dada a pergunta %d: %d",d,listaTreino[d].respostasDadas[i]);
+                            }
+                            
                             break;
                     default:
                         printf("\nOpcao invalida\n\n");
@@ -256,7 +271,8 @@ void menu(){
             break;
             #pragma endregion
         case '4':
-            printf("\n4\n\n");
+            printf("O aluno com mais certas é: ");
+            printf("%d",ranking(listaAluno,sizeAluno));
             break;
         case '5':
             do
@@ -278,7 +294,7 @@ void menu(){
                     break;
                 case '1':
                     lerString("Escreve um id\n",nome,50);
-                    procurPergunta(enunciado, IDal,-1,nome[0],-1,sizePergunta,listaPergunta);
+                    procurPergunta(enunciado, &IDal,-1,nome[0],-1,sizePergunta,listaPergunta);
                     if(pos==-1){
                         printf("Não existe nenhuma pergunta com tal id");
                     }else{
@@ -341,14 +357,16 @@ void respostas(int sizePergunta, resposta *listaResposta){
     listaResposta[2].id=sizePergunta * 10 + 2;
     listaResposta[3].id=sizePergunta * 10 + 3;
 }
-void ranking(aluno *vetor, int sizeAluno)
+int ranking(aluno *vetor, int sizeAluno)
 {
-    int variavel, maior;
-    for(int i = 0; i < sizeAluno; i++){
-        maior = vetor[0].respostasCertas;
+    int i,variavel, maior=0;
+    for(i = 0; i < sizeAluno; i++){
+        
         if(maior < vetor[i].respostasCertas){
-            maior <= vetor[i].respostasCertas;
-            printf("%d\n", vetor[i].id);
+            maior = vetor[i].respostasCertas;
+            variavel=vetor[i].id;
         }
+        
     }
+    return variavel;
 }

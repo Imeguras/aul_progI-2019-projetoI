@@ -34,25 +34,28 @@ treino *criaTreino(int id, int IDaluno, int sizePergunta,int prova, int numperg,
     return listaTreino;
     
 }    
-void fazTreino(aluno al, treino realizado){
-    realizado.estado=0;
-    realizado.IDaluno=al.id;
-    realizado.minutosDur= lerInteiro("Demoraste quantos minutos a fazer o treino?\n",0,MAX_TEMPO);
-    for(int i=0; i<realizado.numperg; i++){
-        printf("%s\n",realizado.per[i].strpergunta);
-        realizado.per[i].tempoMedio=realizado.minutosDur/realizado.numperg;
+void fazTreino(aluno *al, treino *realizado){
+    realizado->estado=0;
+    realizado->IDaluno=al->id;
+    realizado->minutosDur= lerInteiro("Demoraste quantos minutos a fazer o treino?\n",0,MAX_TEMPO);
+    for(int i=0; i<(realizado->numperg); i++){
+        
+        realizado->per[i].tempoMedio=realizado->minutosDur/realizado->numperg;
+        
         for (int j = 0; j < NUMERO_RESPOSTAS_PERGUNTA; j++)
         {
-            printf("%s", realizado.per[i].mulrespostas[j].strresposta);
+            printf("%s", realizado->per[i].mulrespostas[j].strresposta);
         }
-        realizado.respostasDadas[i]=lerInteiro("Qual a resposta: ",1,4)+(realizado.per[i].id*10);
-        if(realizado.respostasDadas[i]== realizado.per[i].respostacerta) {
-            al.respostasCertas+=1;
-            realizado.nota += 1/realizado.numperg;
+        realizado->respostasDadas[i]=lerInteiro("Qual a resposta: ",1,4)+(realizado->per[i].id*10)-1;
+        if(realizado->respostasDadas[i]== realizado->per[i].respostacerta) {
+            al->respostasCertas+=1;
+            realizado->nota += 1/(realizado->numperg);
+            
         }
-        al.respostasTotais+=1;
+        al->respostasTotais+=1;
     }
-    al.treinosComp+=1;
+    al->treinosComp+=1;
+    al->ultimaNota=realizado->nota;
     
 }
 

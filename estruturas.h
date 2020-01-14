@@ -12,6 +12,7 @@ typedef struct
    int treinosComp;
    int respostasTotais;
    int respostasCertas;
+   float ultimaNota;
 }aluno;
 typedef struct{
     int id;

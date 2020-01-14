@@ -102,8 +102,8 @@ void limpaBufferStdin(void)
 @Param alcance-Numero ao qual o valor maximo possivel sera igual
 */
 void generateRandom(){
-    struct tm tampo;
-    srand((unsigned) time(&tampo));
+    time_t *tampo;
+    srand((unsigned) time(tampo));
 }
 int numeroAle(int offset, int alcance){
     if(flagRandom =0){
