@@ -260,7 +260,7 @@ void menu(){
                             for (size_t i = 0; i < MAX_PERGUNTAS_TREINO; i++)
                             {
                                 
-                                printf("ID da reposta dada a pergunta %d: %d",d,listaTreino[d].respostasDadas[i]);
+                                printf("ID da reposta dada a pergunta %d: %d\n",d,listaTreino[d].respostasDadas[i]);
                             }
                             
                             break;
@@ -299,7 +299,7 @@ void menu(){
                         printf("Não existe nenhuma pergunta com tal id");
                     }else{
                         IDal= enunciado[0];
-                        printf("Tempo media da resposta e:%d", listaPergunta[IDal].tempoMedio);
+                        printf("Tempo media da resposta e:%0.1f", listaPergunta[IDal].tempoMedio);
                     }
                     break;
                 case '2':
@@ -362,7 +362,7 @@ int ranking(aluno *vetor, int sizeAluno)
     int i,variavel, maior=0;
     for(i = 0; i < sizeAluno; i++){
         
-        if(maior < vetor[i].respostasCertas){
+        if(maior <= vetor[i].respostasCertas){
             maior = vetor[i].respostasCertas;
             variavel=vetor[i].id;
         }
